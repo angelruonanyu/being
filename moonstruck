@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Being — A Proposal for Moonstruck</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Georgia', serif; background: #F8F6F0; color: #1A1A2E; line-height: 1.7; }
+  .page { max-width: 680px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+  .header { border-left: 3px solid #C9A84C; padding-left: 1.2rem; margin-bottom: 3rem; }
+  .header-label { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A84C; margin-bottom: 0.5rem; }
+  .header-title { font-size: 2rem; font-weight: normal; color: #1E2D6B; line-height: 1.2; margin-bottom: 0.4rem; }
+  .header-sub { font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #888; font-style: italic; }
+  .section { margin-bottom: 2.8rem; }
+  .section-title { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A84C; margin-bottom: 1rem; padding-bottom: 0.4rem; border-bottom: 0.5px solid #e8e0d0; }
+  p { font-size: 15px; color: #2a2a3e; margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+  .en-block { background: #1E2D6B; border-radius: 10px; padding: 1.6rem 1.8rem; margin: 1.5rem 0; }
+  .en-block p { font-size: 15px; color: #fff; line-height: 1.7; font-style: italic; margin-bottom: 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0; }
+  .col-box { border-radius: 10px; padding: 1.2rem 1.4rem; }
+  .col-box.navy { background: #1E2D6B; }
+  .col-box.cream { background: #EDE8DC; }
+  .col-box .col-title { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .col-box.navy .col-title { color: #C9A84C; }
+  .col-box.cream .col-title { color: #7B5A1A; }
+  .col-box ul { list-style: none; padding: 0; }
+  .col-box ul li { font-size: 13px; padding: 4px 0; line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+  .col-box.navy ul li { color: #C8D4EC; }
+  .col-box.cream ul li { color: #3A2A0E; }
+  .col-box ul li::before { content: '—'; flex-shrink: 0; opacity: 0.5; }
+  .tickets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1rem 0; }
+  .ticket { border-radius: 10px; padding: 1rem; text-align: center; border: 0.5px solid #ddd; background: #fff; }
+  .ticket.featured { background: #1E2D6B; border-color: #1E2D6B; }
+  .ticket-label { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #888; margin-bottom: 6px; }
+  .ticket.featured .ticket-label { color: #C9A84C; }
+  .ticket-price { font-size: 22px; font-weight: normal; color: #1E2D6B; margin-bottom: 4px; }
+  .ticket.featured .ticket-price { color: #fff; }
+  .ticket-note { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; color: #aaa; line-height: 1.4; }
+  .ticket.featured .ticket-note { color: #8899cc; }
+  .fin-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: 'Helvetica Neue', sans-serif; font-size: 13px; }
+  .fin-table th { text-align: left; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #888; padding: 6px 10px; border-bottom: 0.5px solid #ddd; }
+  .fin-table td { padding: 9px 10px; border-bottom: 0.5px solid #eee; color: #2a2a3e; vertical-align: top; }
+  .fin-table tr:last-child td { border-bottom: none; }
+  .fin-table .highlight td { background: #F0E8D0; font-weight: 500; }
+  .fin-table .total td { background: #1E2D6B; color: #fff; font-weight: 500; }
+  .fin-table .total td:first-child { border-radius: 6px 0 0 6px; }
+  .fin-table .total td:last-child { border-radius: 0 6px 6px 0; }
+  .amount { text-align: right; }
+  .insight-block { margin: 1.2rem 0; padding-left: 1rem; border-left: 2px solid #C9A84C; }
+  .insight-en { font-size: 14px; color: #1E2D6B; font-weight: normal; margin-bottom: 0.3rem; }
+  .insight-body { font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #666; line-height: 1.6; }
+  .build-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 1rem 0; }
+  .build-card { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 1.1rem 1.2rem; }
+  .build-num { font-family: 'Helvetica Neue', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: #C9A84C; margin-bottom: 0.4rem; }
+  .build-title { font-size: 13px; color: #1E2D6B; font-weight: normal; margin-bottom: 0.6rem; line-height: 1.4; }
+  .build-body { font-family: 'Helvetica Neue', sans-serif; font-size: 11.5px; color: #666; line-height: 1.6; }
+  .questions { margin: 1.2rem 0; }
+  .question-item { display: flex; gap: 12px; margin-bottom: 1.2rem; align-items: flex-start; }
+  .question-item:last-child { margin-bottom: 0; }
+  .q-dot { width: 8px; height: 8px; background: #C9A84C; border-radius: 50%; flex-shrink: 0; margin-top: 8px; }
+  .q-en { font-size: 14px; color: #1E2D6B; margin-bottom: 3px; }
+  .flow { margin: 1rem 0; }
+  .flow-item { display: flex; gap: 14px; margin-bottom: 14px; align-items: flex-start; }
+  .flow-time { font-family: 'Helvetica Neue', sans-serif; font-size: 11px; color: #C9A84C; font-weight: 600; min-width: 48px; padding-top: 2px; }
+  .flow-title { font-size: 14px; font-weight: normal; color: #1E2D6B; margin-bottom: 2px; }
+  .flow-desc { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: #888; line-height: 1.5; }
+  .note-box { font-family: 'Helvetica Neue', sans-serif; font-size: 12px; color: #7B5A1A; background: #FBF4E6; border-left: 2px solid #C9A84C; padding: 0.8rem 1rem; border-radius: 0 6px 6px 0; margin-top: 0.8rem; line-height: 1.7; }
+  .steps { font-family: 'Helvetica Neue', sans-serif; font-size: 13px; color: #3A4A6B; background: #EDE8DC; padding: 1rem 1.2rem; border-radius: 8px; line-height: 1.9; }
+  a { color: #1E2D6B; }
+  @media (max-width: 520px) {
+    .two-col { grid-template-columns: 1fr; }
+    .tickets { grid-template-columns: 1fr; }
+    .build-grid { grid-template-columns: 1fr; }
+    .header-title { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">A proposal for Moonstruck</div>
+    <div class="header-title">Brew & Being</div>
+    <div class="header-sub">Come for the coffee. Stay for the people. Leave with something that matters.</div>
+  </div>
+
+  <!-- 1. Opening — non-profit, website, no Chinese -->
+  <div class="section">
+    <div class="section-title">What this is about</div>
+    <p>Liam, I'm Angel. I'm building Living Well Initiative — a non-profit platform for people who believe that how we live is the most important work we'll ever do. Not productivity, not optimisation. Actually learn and practice to live well.</p>
+    <p>I've been admiring your work with Moonstruck for a while. There's something about the space — the way it holds people — that feels like more than just a coffee shop. I wanted to reach out because I think we might be building toward the same thing from different directions.</p>
+    <p>This is a proposal for a collaboration. Not a big ask — just an idea worth a conversation.</p>
+    <p style="font-family:'Helvetica Neue',sans-serif; font-size:13px; color:#888;">Find out more about what we do: <a href="https://beinghome.uk" target="_blank">beinghome.uk</a></p>
+  </div>
+
+  <!-- 2. What is Brew & Being — English only, bilingual block removed -->
+  <div class="section">
+    <div class="section-title">What is Brew & Being</div>
+    <div class="en-block">
+      <p>A gathering of 10–15 people around coffee, tea, and honest conversation. Just a room of people who want to take life a little more seriously — together.</p>
+    </div>
+    <p>The evening has three parts: you guide a light-roast coffee tasting. I brew Chinese tea by hand — and share a little about what we're building at Being. Then we eat hand-baked rose Basque cheesecake and talk about what we're carrying, and what we keep forgetting to notice.</p>
+  </div>
+
+  <!-- 7. What we see — updated text -->
+  <div class="section">
+    <div class="section-title">What we see in Moonstruck</div>
+    <p>You're already doing something rare. A few things stand out:</p>
+
+    <div class="insight-block">
+      <div class="insight-en">Slow is a choice you've already made.</div>
+      <div class="insight-body">Light roast, hand pour, single origin. Each step is an act of attention. That is already a showcase in the London cafe scene.</div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-en">The space holds people differently.</div>
+      <div class="insight-body">People come to Moonstruck not just for the coffee; they come to slow down and enjoy time. You've built a container for that.</div>
+    </div>
+
+    <div class="insight-block">
+      <div class="insight-en">There's a bigger story waiting.</div>
+      <div class="insight-body">Specialty coffee is a category. "A space that helps you live better" is a movement. I believe Moonstruck is being part of the second — not just a very good coffee shop, but one of London's spaces for intentional living.</div>
+    </div>
+  </div>
+
+  <!-- Evening flow -->
+  <div class="section">
+    <div class="section-title">How the evening flows</div>
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-time">7:00</div>
+        <div class="flow-body">
+          <div class="flow-title">Doors open</div>
+          <div class="flow-desc">Guests arrive, settle in. Each person gets a small card — write down one thing on your mind tonight. No sharing required.</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-time">7:10</div>
+        <div class="flow-body">
+          <div class="flow-title">Coffee tasting — led by Liam</div>
+          <div class="flow-desc">Light roast, single origin, one pour. Not a class — a conversation about what it takes to make one cup right, and what that attention means.</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-time">7:30</div>
+        <div class="flow-body">
+          <div class="flow-title">A moment of quiet</div>
+          <div class="flow-desc">5 minutes. Intentional. Sit with your cup.</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-time">7:35</div>
+        <div class="flow-body">
+          <div class="flow-title">Chinese tea + Living Well Initiative — Angel</div>
+          <div class="flow-desc">Hand-brewed Chinese tea, and a short introduction to Living Well Initiative — what we're building and why. A conversation about slowness, intention, and the art of living well.</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-time">8:20</div>
+        <div class="flow-body">
+          <div class="flow-title">Rose Basque cheesecake + open conversation</div>
+          <div class="flow-desc">We eat, we talk. Each person shares one thing if they want to. No agenda — just honest conversation.</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-time">8:50</div>
+        <div class="flow-body">
+          <div class="flow-title">Close + linger</div>
+          <div class="flow-desc">A short close. Each person writes one thing they want to carry into the week. Then whoever wants to stay, stays.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. What we could build — card 01 updated -->
+  <div class="section">
+    <div class="section-title">What we could build together</div>
+    <div class="build-grid">
+      <div class="build-card">
+        <div class="build-num">01</div>
+        <div class="build-title">Moonstruck as anchor space</div>
+        <div class="build-body">Being gathers in Moonstruck. Your space hosts our community's first encounters with Living Well Initiative programmes. Every session is curated.</div>
+      </div>
+      <div class="build-card">
+        <div class="build-num">02</div>
+        <div class="build-title">Coffee &times; Tea: a joint session</div>
+        <div class="build-body">East meets West. Your light-roast pour alongside hand-brewed Chinese tea. Two slow arts in one evening. A new kind of tasting, a new kind of conversation.</div>
+      </div>
+      <div class="build-card">
+        <div class="build-num">03</div>
+        <div class="build-title">A bigger story together</div>
+        <div class="build-body">Moonstruck becomes part of something larger — one of London's spaces for intentional living. Being's community and network become Moonstruck's extended reach.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What we each bring -->
+  <div class="section">
+    <div class="section-title">What we each bring</div>
+    <div class="two-col">
+      <div class="col-box navy">
+        <div class="col-title">Moonstruck brings</div>
+        <ul>
+          <li>The space for the evening</li>
+          <li>Light-roast coffee tasting (one pour per person)</li>
+          <li>Liam's expertise &amp; presence</li>
+          <li>Moonstruck's community &amp; social reach</li>
+        </ul>
+      </div>
+      <div class="col-box cream">
+        <div class="col-title">Being brings</div>
+        <ul>
+          <li>Event concept, curation &amp; hosting</li>
+          <li>Chinese tea, hand-brewed by Angel</li>
+          <li>Hand-baked rose Basque cheesecake</li>
+          <li>Ticketing &amp; promotion (to be discussed)</li>
+          <li>Being's community reach</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tickets -->
+  <div class="section">
+    <div class="section-title">Ticket pricing</div>
+    <div class="tickets">
+      <div class="ticket">
+        <div class="ticket-label">Early Bird</div>
+        <div class="ticket-price">£32</div>
+        <div class="ticket-note">Available until 1 week before</div>
+      </div>
+      <div class="ticket featured">
+        <div class="ticket-label">Standard</div>
+        <div class="ticket-price">£38</div>
+        <div class="ticket-note">Main ticket price</div>
+      </div>
+      <div class="ticket">
+        <div class="ticket-label">Support</div>
+        <div class="ticket-price">£48</div>
+        <div class="ticket-note">Extra goes to Being Community Fund</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#888; font-family:'Helvetica Neue',sans-serif;">All tickets include: coffee tasting, Chinese tea, rose Basque cheesecake. Capacity: 10–15 guests, not including hosts and team.</p>
+  </div>
+
+  <!-- Revenue split -->
+  <div class="section">
+    <div class="section-title">How we split it</div>
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th class="amount">Split</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>Total revenue</td>
+          <td class="amount">100%</td>
+          <td>Based on actual tickets sold</td>
+        </tr>
+        <tr>
+          <td>Moonstruck — space &amp; coffee</td>
+          <td class="amount">50%</td>
+          <td>Space &amp; coffee contribution</td>
+        </tr>
+        <tr class="total">
+          <td>Being — concept, tea, cheesecake &amp; ops</td>
+          <td class="amount">50%</td>
+          <td>Covers ingredients, ops &amp; community fund</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note-box">Being Commons Ltd is the operating entity. Living Well Initiative (LWI) is the project brand. Brew &amp; Being is one of LWI's event series.</div>
+  </div>
+
+  <!-- Questions -->
+  <div class="section">
+    <div class="section-title">A few questions to sit with</div>
+    <p style="font-size:14px; color:#888; font-family:'Helvetica Neue',sans-serif; font-style:italic; margin-bottom:1.4rem;">Not rhetorical — genuinely curious.</p>
+    <div class="questions">
+      <div class="question-item">
+        <div class="q-dot"></div>
+        <div><div class="q-en">What does Moonstruck mean to you — beyond the coffee?</div></div>
+      </div>
+      <div class="question-item">
+        <div class="q-dot"></div>
+        <div><div class="q-en">What kind of people do you most want to walk through that door?</div></div>
+      </div>
+      <div class="question-item">
+        <div class="q-dot"></div>
+        <div><div class="q-en">If this space could mean something bigger — what would you want that to be?</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next steps -->
+  <div class="section">
+    <div class="section-title">Next steps</div>
+    <p>I'd love to run a first Brew &amp; Being at Moonstruck — ideally in April or May. No pressure, no big commitment. Just one evening, and we see how it feels.</p>
+    <div class="steps" style="margin-top:1rem;">
+      1. A conversation — does this feel right to you?<br>
+      2. Pick a date — a weekday evening in April or May<br>
+      3. Each post from our own channels — you from Moonstruck, me from Being<br>
+      4. Tickets live 2 weeks before — platform to be agreed<br>
+      5. Run it, reflect, go again if it's good
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
