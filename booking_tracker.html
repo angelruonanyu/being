@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>预订追踪 · LWI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1C1B18;
+    --ink-light: #6B6860;
+    --ink-faint: #B5B2AA;
+    --border: #E2DED6;
+    --white: #FFFFFF;
+    --green: #2D5A3D;
+    --green-light: #EAF2EC;
+    --green-mid: #C5DEC9;
+    --amber: #C4782A;
+    --amber-light: #FBF1E6;
+    --blue: #1A4FA0;
+    --blue-light: #E6F0FF;
+    --red: #A02020;
+    --red-light: #FFF0F0;
+    --orange: #B34A00;
+    --orange-light: #FFF0E6;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); padding: 0; }
+
+  .header { background: #4A6741; color: var(--cream); padding: 2rem 3rem; }
+  .header-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; }
+  .header-title em { font-style: italic; color: var(--green-mid); }
+  .header-sub { font-size: 12px; color: rgba(247,244,238,0.5); margin-top: 4px; letter-spacing: 0.04em; }
+
+  .main { padding: 2rem 3rem 4rem; display: flex; flex-direction: column; gap: 2rem; }
+
+  .section-title {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-faint);
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 0.5px solid var(--border);
+    overflow: hidden;
+  }
+
+  .card-header { padding: 1rem 1.25rem 0.75rem; border-bottom: 0.5px solid var(--border); }
+  .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .apt-num { font-size: 11px; color: var(--ink-faint); }
+  .status-badge {
+    font-size: 11px; font-weight: 500; padding: 2px 8px;
+    border-radius: 4px; letter-spacing: 0.02em;
+  }
+  .status-confirmed { background: var(--green-light); color: var(--green); }
+  .status-pending { background: var(--amber-light); color: var(--amber); }
+  .status-negotiating { background: var(--orange-light); color: var(--orange); }
+  .status-requested { background: var(--blue-light); color: var(--blue); }
+
+  .card-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--ink); }
+  .card-addr { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+
+  .card-body { padding: 0.875rem 1.25rem; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+  .field { background: var(--cream); border-radius: 6px; padding: 6px 8px; }
+  .fl { font-size: 10px; color: var(--ink-faint); margin-bottom: 2px; }
+  .fv { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .fv.span2 { grid-column: span 2; }
+  .field.span2 { grid-column: span 2; }
+
+  .notes-box { background: var(--amber-light); border-radius: 6px; padding: 8px 10px; font-size: 12px; color: var(--amber); margin-top: 6px; }
+
+  .conf-code { font-family: monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; color: var(--green); }
+
+  .total-price { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--ink); }
+  .price-note { font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+
+  .payment-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+  .payment-pill { font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 0.5px solid var(--border); color: var(--ink-light); background: var(--white); }
+  .payment-pill.paid { background: var(--green-light); border-color: var(--green-mid); color: var(--green); }
+  .payment-pill.due { background: var(--amber-light); border-color: #E8C898; color: var(--amber); }
+
+  @media (max-width: 600px) {
+    .header { padding: 1.5rem; }
+    .main { padding: 1rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">预订<em>追踪</em></div>
+  <div class="header-sub">London · 2026 夏季</div>
+</div>
+
+<div class="main">
+
+  <!-- 已确认 -->
+  <div>
+    <div class="section-title">已确认 · Confirmed</div>
+    <div class="cards">
+
+      <!-- 已定 A: 47 Warwick Road -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="apt-num">已定 A</span>
+            <span class="status-badge status-confirmed">已确认</span>
+          </div>
+          <div class="card-title">47 Warwick Road</div>
+          <div class="card-addr">47 Warwick Road, London SW5 9UP</div>
+        </div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field"><div class="fl">平台</div><div class="fv">Airbnb / Tina</div></div>
+            <div class="field"><div class="fl">楼层</div><div class="fv">待确认</div></div>
+            <div class="field"><div class="fl">入住</div><div class="fv">19 May 2026</div></div>
+            <div class="field"><div class="fl">退房</div><div class="fv">21 Jun 2026</div></div>
+            <div class="field"><div class="fl">房型</div><div class="fv">2卧 2卫</div></div>
+            <div class="field"><div class="fl">可入住</div><div class="fv">6人</div></div>
+            <div class="field"><div class="fl">主卧</div><div class="fv">双人床</div></div>
+            <div class="field"><div class="fl">卧室 2</div><div class="fv">上下铺</div></div>
+            <div class="field"><div class="fl">客厅</div><div class="fv">沙发床</div></div>
+            <div class="field span2"><div class="fl">Confirmation Code</div><div class="fv conf-code">HMH8CY5JKZ</div></div>
+          </div>
+          <div class="dist-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:10px 0;">
+            <div class="field" style="text-align:center;"><div class="fl">6号</div><div class="fv">约 7 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">233</div><div class="fv">约 11 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">Lillie Square</div><div class="fv">约 10 分钟</div></div>
+          </div>
+          <div class="total-price">£7,717.14</div>
+          <div class="price-note">总价（£7,249.43 + £467.71）</div>
+          <div class="payment-row">
+            <span class="payment-pill paid">已付 £7,249.43 · 23 Mar</span>
+            <span class="payment-pill due">待付 £467.71 · 9 Jun</span>
+          </div>
+          <div style="margin-top:10px;">
+            <a href="https://www.airbnb.co.uk/rooms/1568373201542166862" target="_blank" style="font-size:12px; color:#2D5A3D; text-decoration:none; border-bottom:0.5px solid #C5DEC9;">Airbnb 房源链接 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已定 B: Templeton Gardens / Key Flats -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="apt-num">已定 B</span>
+            <span class="status-badge status-pending">Pending 确认中</span>
+          </div>
+          <div class="card-title">Templeton Gardens</div>
+          <div class="card-addr">Templeton Gardens（门牌待确认）</div>
+        </div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field"><div class="fl">平台</div><div class="fv">Airbnb / Ateeq</div></div>
+            <div class="field"><div class="fl">楼层</div><div class="fv">2楼</div></div>
+            <div class="field"><div class="fl">入住</div><div class="fv">19 May 2026</div></div>
+            <div class="field"><div class="fl">退房</div><div class="fv">21 Jun 2026</div></div>
+            <div class="field"><div class="fl">房型</div><div class="fv">2卧 1卫</div></div>
+            <div class="field"><div class="fl">可入住</div><div class="fv">6人</div></div>
+            <div class="field span2"><div class="fl">Confirmation Code</div><div class="fv conf-code">HMP8QWF8ZS</div></div>
+          </div>
+          <div class="dist-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:10px 0;">
+            <div class="field" style="text-align:center;"><div class="fl">6号</div><div class="fv">约 7 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">233</div><div class="fv">约 5 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">Lillie Square</div><div class="fv">约 16 分钟</div></div>
+          </div>
+          <div class="total-price">£7,189.98</div>
+          <div class="price-note">总价（待 Host 确认后生效）</div>
+          <div class="notes-box">⏳ 已发送 Request，等待 Ateeq 在 24 小时内回复</div>
+          <div style="margin-top:10px;">
+            <a href="https://www.airbnb.co.uk/rooms/1350147928182021459" target="_blank" style="font-size:12px; color:#2D5A3D; text-decoration:none; border-bottom:0.5px solid #C5DEC9;">Airbnb 房源链接 →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 洽谈中 / 待确认 -->
+  <div>
+    <div class="section-title">洽谈中 · In Progress</div>
+    <div class="cards">
+
+      <!-- 公寓 01 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="apt-num">公寓 #01</span>
+            <span class="status-badge status-negotiating">中介洽谈中</span>
+          </div>
+          <div class="card-title">Sullivan Court</div>
+          <div class="card-addr">17 Sullivan Court, 109 Earls Court Road, SW5</div>
+        </div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field"><div class="fl">平台</div><div class="fv">Foxtons</div></div>
+            <div class="field"><div class="fl">楼层</div><div class="fv">2楼（有电梯）</div></div>
+            <div class="field"><div class="fl">入住</div><div class="fv">19 May 2026</div></div>
+            <div class="field"><div class="fl">退房</div><div class="fv">21 Jun 2026</div></div>
+            <div class="field"><div class="fl">房型</div><div class="fv">3卧 2卫</div></div>
+            <div class="field"><div class="fl">可入住</div><div class="fv">6人</div></div>
+            <div class="field"><div class="fl">总面积</div><div class="fv">79.9 m²</div></div>
+            <div class="field"><div class="fl">客厅</div><div class="fv">20.0 m²</div></div>
+            <div class="field"><div class="fl">厨房</div><div class="fv">6.98 m²</div></div>
+            <div class="field"><div class="fl">主卧</div><div class="fv">16.09 m²</div></div>
+            <div class="field"><div class="fl">卧室 2</div><div class="fv">10.38 m²</div></div>
+            <div class="field"><div class="fl">卧室 3</div><div class="fv">9.03 m²</div></div>
+          </div>
+          <div class="dist-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:10px 0;">
+            <div class="field" style="text-align:center;"><div class="fl">6号</div><div class="fv">约 7 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">233</div><div class="fv">约 2 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">Lillie Square</div><div class="fv">约 20 分钟</div></div>
+          </div>
+          <div class="total-price">£10,107.95</div>
+          <div class="price-note">£2,150 pw · 33天（中介报价约 £11K，仍在谈判中）</div>
+          <div class="notes-box">⚠️ 价格由 £2,150 pw 涨价，目前总价约 £11K，仍在谈判中</div>
+          <div style="margin-top:10px;">
+            <a href="https://www.foxtons.co.uk/short-let-properties/sw5/chpk2553428" target="_blank" style="font-size:12px; color:#2D5A3D; text-decoration:none; border-bottom:0.5px solid #C5DEC9;">Foxtons 房源链接 →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公寓 08 -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-meta">
+            <span class="apt-num">公寓 #08</span>
+            <span class="status-badge status-requested">Booking.com 已 Request</span>
+          </div>
+          <div class="card-title">Durrels House</div>
+          <div class="card-addr">Durrels House, Warwick Road, SW5</div>
+        </div>
+        <div class="card-body">
+          <div class="field-grid">
+            <div class="field"><div class="fl">平台</div><div class="fv">Booking.com</div></div>
+            <div class="field"><div class="fl">楼层</div><div class="fv">待确认</div></div>
+            <div class="field"><div class="fl">入住</div><div class="fv">19 May 2026</div></div>
+            <div class="field"><div class="fl">退房</div><div class="fv">21 Jun 2026</div></div>
+            <div class="field"><div class="fl">房型</div><div class="fv">3卧 2卫</div></div>
+            <div class="field"><div class="fl">可入住</div><div class="fv">待确认</div></div>
+            <div class="field"><div class="fl">总面积</div><div class="fv">109 m²</div></div>
+            <div class="field"><div class="fl">主卧</div><div class="fv">大双人床</div></div>
+            <div class="field"><div class="fl">卧室 2</div><div class="fv">2单人床</div></div>
+            <div class="field"><div class="fl">卧室 3</div><div class="fv">上下铺</div></div>
+          </div>
+          <div class="dist-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin:10px 0;">
+            <div class="field" style="text-align:center;"><div class="fl">6号</div><div class="fv">约 7 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">233</div><div class="fv">约 11 分钟</div></div>
+            <div class="field" style="text-align:center;"><div class="fl">Lillie Square</div><div class="fv">约 24 分钟</div></div>
+          </div>
+          <div class="total-price">£8,505</div>
+          <div class="price-note">33晚总价（含税，Booking.com）</div>
+          <div class="notes-box">⏳ Booking.com Request 已发送，等待确认 · 有阳台 · 空调</div>
+          <div style="margin-top:10px;">
+            <a href="https://www.booking.com/hotel/gb/durrels-house.html?checkin=2026-05-19&checkout=2026-06-21&group_adults=2&no_rooms=1&nflt=oos%3D1%3Bentire_place_bedroom_count%3D3" target="_blank" style="font-size:12px; color:#2D5A3D; text-decoration:none; border-bottom:0.5px solid #C5DEC9;">Booking.com 房源链接 →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
