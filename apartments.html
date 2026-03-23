@@ -232,6 +232,7 @@
 const apartments = [
   {
     num: '02',
+    source: 'foxtons',
     title: 'Redcliffe Square',
     subtitle: 'Chelsea, SW10',
     addr: 'Redcliffe Square',
@@ -242,11 +243,11 @@ const apartments = [
     totalArea: 134.6,
     totalAreaNote: '',
     rooms: [
-      { label: '客厅', val: '36.30 ㎡' },
-      { label: '厨房', val: '≈ 10 ㎡' },
-      { label: '主卧', val: '25.30 ㎡' },
-      { label: '卧室 2', val: '13.33 ㎡' },
-      { label: '卧室 3', val: '5.64 ㎡' },
+      { label: '客厅', val: '36.30 m²' },
+      { label: '厨房', val: '≈ 10 m²' },
+      { label: '主卧', val: '25.30 m²' },
+      { label: '卧室 2', val: '13.33 m²' },
+      { label: '卧室 3', val: '5.64 m²' },
     ],
     dist: { cluny: '约 16 分钟', cromwell: '约 14 分钟', lillie: '约 16 分钟' },
     tags: ['主卧配套卫浴 + 步入式衣橱', '两个露台', '朝西南花园景', '全新翻新'],
@@ -254,6 +255,7 @@ const apartments = [
   },
   {
     num: '03',
+    source: 'foxtons',
     title: 'Barkston Gardens',
     subtitle: 'Earls Court, SW5',
     addr: 'Barkston Gardens（门牌待确认）',
@@ -262,20 +264,21 @@ const apartments = [
     hasLift: false,
     beds: 3, baths: 2,
     totalArea: null,
-    totalAreaNote: '≈ 113 ㎡（含公共空间估算）',
+    totalAreaNote: '≈ 113 m²（含公共空间估算）',
     rooms: [
-      { label: '客厅', val: '29.38 ㎡' },
-      { label: '厨房', val: '8.42 ㎡' },
-      { label: '主卧', val: '22.62 ㎡' },
-      { label: '卧室 2', val: '13.05 ㎡' },
-      { label: '卧室 3', val: '14.49 ㎡' },
+      { label: '客厅', val: '29.38 m²' },
+      { label: '厨房', val: '8.42 m²' },
+      { label: '主卧', val: '22.62 m²' },
+      { label: '卧室 2', val: '13.05 m²' },
+      { label: '卧室 3', val: '14.49 m²' },
     ],
-    dist: { cluny: '约 13 分钟', cromwell: '约 8 分钟', lillie: '约 17 分钟' },
+    dist: { cluny: '约 13 分钟', cromwell: '约 8 分钟', lillie: '约 16 分钟' },
     tags: ['地下一层', '2卫', '近Earls Court站', '现代装修'],
     link: 'https://www.foxtons.co.uk/short-let-properties/SW5/kncl5231486',
   },
   {
     num: '04',
+    source: 'foxtons',
     title: 'Harcourt Terrace',
     subtitle: 'South Kensington, SW10',
     addr: 'Harcourt Terrace（门牌待确认）',
@@ -286,10 +289,10 @@ const apartments = [
     totalArea: 74.6,
     totalAreaNote: '',
     rooms: [
-      { label: '客厅', val: '23.34 ㎡' },
-      { label: '厨房', val: '5.23 ㎡' },
-      { label: '主卧', val: '13.65 ㎡' },
-      { label: '卧室 2', val: '8.11 ㎡' },
+      { label: '客厅', val: '23.34 m²' },
+      { label: '厨房', val: '5.23 m²' },
+      { label: '主卧', val: '13.65 m²' },
+      { label: '卧室 2', val: '8.11 m²' },
     ],
     dist: { cluny: '约 19 分钟', cromwell: '约 17 分钟', lillie: '约 19 分钟' },
     tags: ['屋顶露台', '储物间', '近South Kensington'],
@@ -297,6 +300,7 @@ const apartments = [
   },
   {
     num: '05',
+    source: 'foxtons',
     title: 'Eardley Crescent',
     subtitle: 'Earls Court, SW5',
     addr: 'Eardley Crescent（门牌待确认）',
@@ -307,10 +311,10 @@ const apartments = [
     totalArea: 60.0,
     totalAreaNote: '',
     rooms: [
-      { label: '客厅', val: '20.04 ㎡' },
-      { label: '厨房', val: '6.27 ㎡' },
-      { label: '主卧', val: '14.53 ㎡' },
-      { label: '卧室 2', val: '8.61 ㎡' },
+      { label: '客厅', val: '20.04 m²' },
+      { label: '厨房', val: '6.27 m²' },
+      { label: '主卧', val: '14.53 m²' },
+      { label: '卧室 2', val: '8.61 m²' },
     ],
     dist: { cluny: '约 18 分钟', cromwell: '约 21 分钟', lillie: '约 10 分钟' },
     tags: ['独立厨房', '双人卧室', '近West Brompton站'],
@@ -318,6 +322,7 @@ const apartments = [
   },
   {
     num: '06',
+    source: 'foxtons',
     title: 'Finborough Road',
     subtitle: 'Chelsea, SW10',
     addr: 'Finborough Road（门牌待确认）',
@@ -329,15 +334,65 @@ const apartments = [
     totalAreaNote: '',
     rooms: [
       { label: '客厅', val: '无独立客厅' },
-      { label: '厨房', val: '11.59 ㎡' },
-      { label: '卧室 1', val: '9.00 ㎡' },
-      { label: '卧室 2', val: '12.26 ㎡' },
+      { label: '厨房', val: '11.59 m²' },
+      { label: '卧室 1', val: '9.00 m²' },
+      { label: '卧室 2', val: '12.26 m²' },
     ],
     dist: { cluny: '约 16 分钟', cromwell: '约 17 分钟', lillie: '约 15 分钟' },
     tags: ['两卧均配套卫浴', '高挑天花板', '储物间 ×2', '全新翻新'],
     link: 'https://www.foxtons.co.uk/short-let-properties/sw10/chpk1175525',
   },
+  {
+    num: '07',
+    source: 'airbnb',
+    title: 'Ifield Road',
+    subtitle: 'West Brompton · Airbnb',
+    addr: 'Ifield Road（具体地址待入住确认）',
+    pw: 2476,
+    fixedTotal: null,
+    floor: '1–3楼（无电梯）',
+    hasLift: false,
+    beds: 3, baths: 2,
+    totalArea: null,
+    totalAreaNote: '未披露',
+    rooms: [
+      { label: '客厅', val: '大开放式客厅' },
+      { label: '厨房', val: '全配独立厨房' },
+      { label: '主卧', val: 'King床' },
+      { label: '卧室 2', val: 'SuperKing/双单人' },
+      { label: '卧室 3', val: '双人床' },
+    ],
+    dist: { cluny: '约 19 分钟', cromwell: '约 21 分钟', lillie: '约 17 分钟' },
+    tags: ['近Chelsea FC 10分钟', '近West Brompton站 10分钟', '洗碗机', '咖啡机', '免费取消至4月16日'],
+    link: 'https://www.airbnb.co.uk/rooms/1605307337871446957',
+  },
+  {
+    num: '09',
+    source: 'airbnb',
+    title: 'Earls Court Road',
+    subtitle: 'Earls Court · Airbnb',
+    addr: 'Earl\'s Court Square, SW5 9JT 附近',
+    pw: 1985,
+    fixedTotal: null,
+    floor: '2楼（无电梯）',
+    hasLift: false,
+    beds: 2, baths: 2,
+    maxGuests: 6,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '客厅', val: '含沙发床（可住6人）' },
+      { label: '厨房', val: '开放式全配厨房' },
+      { label: '主卧', val: '双人床 + 配套卫浴' },
+      { label: '卧室 2', val: '双人床 + 侧床' },
+    ],
+    dist: { cluny: '约 8 分钟', cromwell: '约 5 分钟', lillie: '约 16 分钟' },
+    tags: ['近Earls Court站 1分钟', '维多利亚高挑天花', '洗衣+烘干机', '免费取消至4月19日', '最早5月18日起租'],
+    link: 'https://www.airbnb.co.uk/rooms/1629370913009026936',
+  },
 ];
+
+const AIRBNB_FEE = 0.082;
 
 function dailyRate(pw) {
   return pw * 52 / 365;
@@ -365,47 +420,56 @@ function renderCards(days) {
   const totals = [];
 
   apartments.forEach(apt => {
-    const dr = dailyRate(apt.pw);
-    const total = totalPrice(apt.pw, days);
+    const dr = apt.pw ? dailyRate(apt.pw) : null;
+    const baseTotal = apt.fixedTotal ? apt.fixedTotal : totalPrice(apt.pw, days);
+    const total = apt.source === 'airbnb' ? baseTotal * (1 + AIRBNB_FEE) : baseTotal;
     totals.push({ total, dr });
 
-    const areaDisplay = apt.totalArea
-      ? `${apt.totalArea} ㎡`
-      : apt.totalAreaNote;
+    const pwDisplay = apt.pw ? `£${apt.pw.toLocaleString()} pw` : 'Airbnb';
+    const dailyDisplay = dr ? fmt(dr) + '/天' : `${fmt(total / days)}/晚（均摊）`;
+    const sourceLabel = apt.source === 'airbnb' ? 'Airbnb' : 'Foxtons';
+    const sourceBg = apt.source === 'airbnb' ? '#FFF0E6' : '#E6F0FF';
+    const sourceColor = apt.source === 'airbnb' ? '#B34A00' : '#1A4FA0';
+    const priceNote = apt.source === 'airbnb'
+      ? `${days} 天总价（含 ~8.2% 服务费）`
+      : `${days} 天总价`;
+
+    const areaDisplay = apt.totalArea ? `${apt.totalArea} m²` : null;
+
+    const filteredRooms = apt.rooms.filter(r =>
+      r.val && r.val !== '待确认' && r.val !== '未披露'
+    );
 
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
       <div class="card-top">
         <div>
-          <div class="card-num">公寓 #${apt.num}</div>
+          <div class="card-num">公寓 #${apt.num} <span style="font-size:10px; padding:2px 7px; border-radius:4px; background:${sourceBg}; color:${sourceColor}; font-weight:500; letter-spacing:0.03em;">${sourceLabel}</span></div>
           <div class="card-title">${apt.title}</div>
           <div class="card-addr">${apt.addr}</div>
         </div>
-        <div class="pw-badge">£${apt.pw.toLocaleString()} pw</div>
+        <div class="pw-badge">${pwDisplay}</div>
       </div>
       <div class="card-price">
         <div class="total-price">${fmt(total)}</div>
-        <div class="price-meta">${days} 天总价</div>
-        <div class="daily-rate">${fmt(dr)}/天</div>
+        <div class="price-meta">${priceNote}</div>
+        <div class="daily-rate">${dailyDisplay}</div>
       </div>
       <div class="card-body">
         <div class="section-label">基本信息</div>
         <div class="pill-row">
           <span class="pill">${apt.floor}</span>
           <span class="pill">${apt.beds}卧 ${apt.baths}卫</span>
-          <span class="pill">可住 ${apt.beds * 2} 人</span>
+          <span class="pill">可住 ${apt.maxGuests || apt.beds * 2} 人</span>
           ${apt.hasLift ? '<span class="pill">有电梯</span>' : ''}
           ${apt.reserved ? '<span class="pill reserved">' + apt.reserved + '</span>' : ''}
         </div>
 
         <div class="section-label">空间面积</div>
         <div class="area-grid">
-          <div class="area-item span2">
-            <div class="area-lbl">总面积</div>
-            <div class="area-val">${areaDisplay}</div>
-          </div>
-          ${apt.rooms.map(r => `
+          ${areaDisplay ? `<div class="area-item span2"><div class="area-lbl">总面积</div><div class="area-val">${areaDisplay}</div></div>` : ''}
+          ${filteredRooms.map(r => `
             <div class="area-item">
               <div class="area-lbl">${r.label}</div>
               <div class="area-val">${r.val}</div>
