@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>短租公寓汇总 · LWI</title>
+<title>短租公寓汇总</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -390,6 +390,145 @@ const apartments = [
     tags: ['近Earls Court站 1分钟', '维多利亚高挑天花', '洗衣+烘干机', '免费取消至4月19日', '最早5月18日起租'],
     link: 'https://www.airbnb.co.uk/rooms/1629370913009026936',
   },
+  {
+    num: '10',
+    source: 'foxtons',
+    title: 'Collingham Place',
+    subtitle: 'Earls Court, SW5',
+    addr: 'Collingham Place, SW5 0PZ',
+    pw: 1500,
+    floor: '3楼',
+    hasLift: false,
+    beds: 2, baths: 2,
+    totalArea: 63.9,
+    totalAreaNote: '',
+    rooms: [
+      { label: '客厅 + 厨房', val: '29.04 m²' },
+      { label: '卧室 1', val: '8.99 m²' },
+      { label: '卧室 2', val: '8.31 m²' },
+    ],
+    dist: { cluny: '约 15 分钟', cromwell: '约 6 分钟', lillie: '约 20 分钟' },
+    tags: ['屋顶露台', '开放式客厅+厨房', '现代装修'],
+    link: 'https://www.foxtons.co.uk/short-let-properties/SW5/chpk3865802',
+  },
+  {
+    num: '11',
+    source: 'airbnb',
+    title: '102 Lexham Gardens',
+    subtitle: 'Kensington, W8 · Airbnb',
+    addr: '102 Lexham Gardens, W8 6QN',
+    pw: 1107,
+    fixedTotal: null,
+    floor: '待确认',
+    hasLift: true,
+    beds: 2, baths: 2,
+    maxGuests: 4,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '卧室', val: '小双人床（实为1卧）' },
+      { label: '客厅', val: '可隔断为第2间房' },
+      { label: '厨房', val: '独立厨房' },
+    ],
+    dist: { cluny: '约 14 分钟', cromwell: '约 5 分钟', lillie: '约 23 分钟' },
+    tags: ['有电梯', 'Superhost', '评分 5.0', '以前住过', '客厅可隔断'],
+    link: 'https://www.airbnb.co.uk/rooms/898601686024057935',
+  },
+  {
+    num: '12',
+    source: 'airbnb',
+    title: 'Collingham Road',
+    subtitle: 'Earls Court · Airbnb',
+    addr: 'Collingham Road（具体地址待确认）',
+    pw: 2088,
+    fixedTotal: null,
+    floor: '待确认',
+    hasLift: true,
+    beds: 2, baths: 1,
+    maxGuests: 4,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '客厅', val: '开放式客厅+厨房' },
+      { label: '卧室 1', val: '双人床' },
+      { label: '卧室 2', val: '双人床' },
+    ],
+    dist: { cluny: '约 16 分钟', cromwell: '约 7 分钟', lillie: '约 20 分钟' },
+    tags: ['有电梯', '阳台', '高挑天花板', '最早5月18日起租'],
+    link: 'https://www.airbnb.co.uk/rooms/1187591260531056232',
+  },
+  {
+    num: '13',
+    source: 'airbnb',
+    title: 'Redfield Lane',
+    subtitle: 'Earls Court, SW5 · Airbnb',
+    addr: 'Redfield Lane, SW5',
+    pw: 2010,
+    fixedTotal: null,
+    floor: '3楼（无电梯）',
+    hasLift: false,
+    beds: 2, baths: 1,
+    maxGuests: 5,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '客厅', val: '独立客厅' },
+      { label: '厨房', val: '独立厨房' },
+      { label: '卧室 1', val: 'King床 + 单人床' },
+      { label: '卧室 2', val: '单人床' },
+    ],
+    dist: { cluny: '约 10 分钟', cromwell: '约 3 分钟', lillie: '约 20 分钟' },
+    tags: ['空调', '近Earls Court站', '最早5月18日起租', '免费取消至4月19日'],
+    link: 'https://www.airbnb.co.uk/rooms/1638496041452186126',
+  },
+  {
+    num: '14',
+    source: 'airbnb',
+    title: 'Courtfield Gardens',
+    subtitle: 'Kensington · Airbnb',
+    addr: 'Courtfield Gardens（具体地址待确认）',
+    pw: 1867,
+    fixedTotal: null,
+    floor: '地下室',
+    hasLift: false,
+    beds: 2, baths: 3,
+    maxGuests: 5,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '客厅', val: '开放式+天窗采光' },
+      { label: '厨房', val: '独立厨房' },
+      { label: '主卧', val: 'Queen床 + 配套卫浴' },
+      { label: '卧室 2', val: '双人床 + 配套卫浴 + 私人露台' },
+    ],
+    dist: { cluny: '约 16 分钟', cromwell: '约 7 分钟', lillie: '约 20 分钟' },
+    tags: ['两卧均配套卫浴', '私人露台 ×2', 'Jacuzzi浴缸', '大理石地板', '地暖', '评分 4.61', '免费取消至4月19日'],
+    link: 'https://www.airbnb.co.uk/rooms/775871995137581334',
+  },
+  {
+    num: '15',
+    source: 'airbnb',
+    title: 'Finborough Road',
+    subtitle: 'Chelsea · Airbnb',
+    addr: 'Finborough Road（具体地址待确认）',
+    pw: 1318,
+    fixedTotal: null,
+    floor: '待确认',
+    hasLift: false,
+    beds: 2, baths: 1,
+    maxGuests: 5,
+    totalArea: null,
+    totalAreaNote: null,
+    rooms: [
+      { label: '客厅', val: '沙发床 + 气垫床' },
+      { label: '厨房', val: '独立厨房' },
+      { label: '卧室 1', val: '单人床' },
+      { label: '卧室 2', val: 'Queen床' },
+    ],
+    dist: { cluny: '约 16 分钟', cromwell: '约 17 分钟', lillie: '约 15 分钟' },
+    tags: ['Superhost', '评分 4.95', 'Guest Favourite', '允许宠物', '免费取消至4月19日'],
+    link: 'https://www.airbnb.co.uk/rooms/675453246981052994',
+  },
 ];
 
 const AIRBNB_FEE = 0.082;
@@ -459,7 +598,7 @@ function renderCards(days) {
       <div class="card-body">
         <div class="section-label">基本信息</div>
         <div class="pill-row">
-          <span class="pill">${apt.floor}</span>
+          ${apt.floor && apt.floor !== '待确认' ? `<span class="pill">${apt.floor}</span>` : ''}
           <span class="pill">${apt.beds}卧 ${apt.baths}卫</span>
           <span class="pill">可住 ${apt.maxGuests || apt.beds * 2} 人</span>
           ${apt.hasLift ? '<span class="pill">有电梯</span>' : ''}
