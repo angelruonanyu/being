@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的伦敦集锦</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f7f2e8;--cream2:#ede6d3;--parchment:#e0d5bc;--green:#2d4a3e;--green-mid:#3e6b58;--green-pale:#eaf1ed;--terracotta:#b55a3f;--gold:#c9a24a;--gold-light:#f0e4c0;--ink:#1c1c18;--ink2:#4a4840;--ink3:#8a8578;--white:#fdfaf2;--shadow:0 2px 16px rgba(45,74,62,.10);--shadow-lg:0 6px 32px rgba(45,74,62,.15);--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;min-height:100vh;background-image:radial-gradient(ellipse at 15% 10%,rgba(201,162,74,.07) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(45,74,62,.07) 0%,transparent 55%)}
+header{background:var(--green);color:var(--cream);padding:26px 40px 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.header-title h1{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;line-height:1.1}
+.header-title p{font-size:.78rem;color:rgba(232,224,200,.6);margin-top:3px;letter-spacing:.04em}
+.header-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;cursor:pointer;border:none;transition:all .15s;white-space:nowrap}
+.btn-primary{background:var(--gold);color:var(--ink)}.btn-primary:hover{background:#deb65a}
+.btn-outline{background:transparent;color:var(--cream);border:1.5px solid rgba(232,224,200,.35)}.btn-outline:hover{background:rgba(255,255,255,.08)}
+.btn-ghost{background:var(--cream2);color:var(--ink2);border:1.5px solid var(--parchment)}.btn-ghost:hover{background:var(--parchment)}
+.btn-danger{background:#f0e0db;color:#8b2a18;border:none}.btn-danger:hover{background:#e0c8c1}
+.btn-green{background:var(--green);color:var(--cream)}.btn-green:hover{background:var(--green-mid)}
+.btn-sm{padding:6px 12px;font-size:.78rem}
+.stats-bar{background:var(--green-mid);color:var(--cream2);padding:8px 40px;font-size:.77rem;display:flex;gap:24px;flex-wrap:wrap;letter-spacing:.02em}
+.stats-bar strong{color:var(--gold-light);font-weight:600}
+.filter-panel{background:var(--white);border-bottom:1px solid var(--parchment);padding:14px 40px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--cream);border:1.5px solid var(--parchment);border-radius:8px;padding:8px 13px;flex:1;min-width:180px;max-width:300px}
+.search-box input{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:.86rem;color:var(--ink);width:100%;outline:none}
+.search-box input::placeholder{color:var(--ink3)}
+.filter-sep{width:1px;height:28px;background:var(--parchment)}
+.filter-group{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:.72rem;color:var(--ink3);font-weight:600;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase}
+.chip{display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;font-size:.76rem;font-weight:500;cursor:pointer;border:1.5px solid var(--parchment);background:var(--cream);color:var(--ink2);transition:all .12s;white-space:nowrap;user-select:none}
+.chip:hover{border-color:var(--green-mid);color:var(--green)}.chip.active{background:var(--green);color:var(--cream);border-color:var(--green)}
+.chip-clear{background:transparent;border-color:transparent;color:var(--terracotta);font-size:.74rem}.chip-clear:hover{background:#f5e8e4;border-color:transparent}
+main{padding:24px 40px}
+.grid-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.grid-header h2{font-size:.76rem;font-weight:600;color:var(--ink3);letter-spacing:.05em;text-transform:uppercase}
+.sort-select{font-family:'DM Sans',sans-serif;font-size:.79rem;border:1.5px solid var(--parchment);background:var(--white);color:var(--ink2);padding:5px 10px;border-radius:6px;cursor:pointer;outline:none}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:15px}
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s,transform .15s}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.card-stripe{height:4px}.card-stripe.visited{background:var(--green)}.card-stripe.want{background:var(--gold)}
+.card-body{padding:15px 17px 11px;flex:1}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+.card-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;line-height:1.25;color:var(--ink);flex:1}
+.status-badge{font-size:.66rem;font-weight:600;padding:3px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}
+.status-badge.visited{background:var(--green-pale);color:var(--green)}.status-badge.want{background:var(--gold-light);color:#7a5c10}
+.card-cat{font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--terracotta);margin-bottom:5px;display:block}
+.card-address{font-size:.76rem;color:var(--ink3);margin-bottom:7px;line-height:1.4}
+.card-note{font-size:.81rem;color:var(--ink2);line-height:1.55;font-style:italic;margin-bottom:9px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-scenes{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.scene-tag{font-size:.66rem;padding:2px 7px;border-radius:10px;background:var(--cream2);color:var(--ink2);font-weight:500}
+.card-footer{padding:9px 17px 13px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--cream2);gap:8px}
+.map-link{font-size:.73rem;color:var(--green-mid);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:4px}
+.map-link:hover{color:var(--green);text-decoration:underline}
+.card-actions{display:flex;gap:5px}
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink3)}
+.empty-state .emoji{font-size:2.8rem;margin-bottom:10px}
+.empty-state h3{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--ink2);margin-bottom:5px}
+.empty-state p{font-size:.85rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(28,28,24,.48);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--white);border-radius:14px;box-shadow:0 12px 48px rgba(28,28,24,.22);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;transform:translateY(14px);transition:transform .2s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-header{padding:20px 22px 15px;border-bottom:1px solid var(--cream2);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--white);z-index:1}
+.modal-header h2{font-family:'Playfair Display',serif;font-size:1.25rem}
+.modal-close{width:28px;height:28px;border-radius:50%;border:none;background:var(--cream2);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;color:var(--ink2);transition:background .12s}
+.modal-close:hover{background:var(--parchment)}
+.modal-body{padding:18px 22px;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--cream2);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:var(--white)}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{font-size:.78rem;font-weight:600;color:var(--ink2);letter-spacing:.02em}
+input[type=text],input[type=url],select,textarea{font-family:'DM Sans',sans-serif;font-size:.86rem;padding:8px 12px;border:1.5px solid var(--parchment);border-radius:8px;background:var(--cream);color:var(--ink);outline:none;transition:border-color .12s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--green-mid);background:var(--white)}
+textarea{resize:vertical;min-height:80px;line-height:1.5}
+.chips-selector{display:flex;gap:6px;flex-wrap:wrap}
+.chip-sel{padding:5px 12px;border-radius:20px;font-size:.76rem;font-weight:500;cursor:pointer;border:1.5px solid var(--parchment);background:var(--cream);color:var(--ink2);transition:all .12s;user-select:none}
+.chip-sel:hover{border-color:var(--green-mid)}.chip-sel.selected{background:var(--green);color:var(--cream);border-color:var(--green)}
+.toast{position:fixed;bottom:26px;right:26px;background:var(--green);color:var(--cream);padding:11px 18px;border-radius:9px;font-size:.84rem;box-shadow:var(--shadow-lg);z-index:200;transform:translateY(18px);opacity:0;transition:all .22s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:640px){header,.filter-panel,main,.stats-bar{padding-left:16px;padding-right:16px}.form-row{grid-template-columns:1fr}.cards-grid{grid-template-columns:1fr}.header-title h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>🗺 我的伦敦集锦</h1>
+    <p>London Places · Personal Collection</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-outline" onclick="openExport()">📤 导出分享</button>
+    <button class="btn btn-primary" onclick="openAdd()">＋ 添加地点</button>
+  </div>
+</header>
+
+<div class="stats-bar">
+  共 <strong id="statTotal">0</strong> 个地点 &nbsp;·&nbsp;
+  ✅ 去过 <strong id="statVisited">0</strong> &nbsp;·&nbsp;
+  ⭐ 想去 <strong id="statWant">0</strong> &nbsp;·&nbsp;
+  当前显示 <strong id="statShown">0</strong>
+</div>
+
+<div class="filter-panel">
+  <div class="search-box">
+    <span style="color:var(--ink3);font-size:.88rem">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜索名称、地址、备注…" oninput="applyFilters()">
+  </div>
+  <div class="filter-sep"></div>
+  <div class="filter-group">
+    <span class="filter-label">状态</span>
+    <div id="statusChips" class="filter-group"></div>
+  </div>
+  <div class="filter-sep"></div>
+  <div class="filter-group">
+    <span class="filter-label">类别</span>
+    <div id="catChips" class="filter-group"></div>
+  </div>
+  <div class="filter-sep"></div>
+  <div class="filter-group">
+    <span class="filter-label">场景</span>
+    <div id="sceneChips" class="filter-group"></div>
+  </div>
+  <button class="chip chip-clear" onclick="clearFilters()">✕ 清除</button>
+</div>
+
+<main>
+  <div class="grid-header">
+    <h2 id="gridLabel">所有地点</h2>
+    <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+      <option value="recent">最近添加</option>
+      <option value="name">按名称</option>
+      <option value="cat">按类别</option>
+      <option value="status">按状态</option>
+    </select>
+  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</main>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnBg(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">添加地点</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>名称 *</label>
+          <input type="text" id="fName" placeholder="地点名称">
+        </div>
+        <div class="form-group">
+          <label>类别 *</label>
+          <select id="fCat"><option value="">选择类别…</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>地址</label>
+        <input type="text" id="fAddress" placeholder="街道地址 / 区域">
+      </div>
+      <div class="form-group">
+        <label>网站 / 地图链接</label>
+        <input type="url" id="fUrl" placeholder="https://…">
+      </div>
+      <div class="form-group">
+        <label>状态</label>
+        <div class="chips-selector" id="fStatus">
+          <span class="chip-sel selected" data-val="want" onclick="selectStatus(this)">⭐ 想去</span>
+          <span class="chip-sel" data-val="visited" onclick="selectStatus(this)">✅ 去过</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>适合场景（可多选）</label>
+        <div class="chips-selector" id="fScenes"></div>
+      </div>
+      <div class="form-group">
+        <label>备注 / 推荐理由</label>
+        <textarea id="fNote" placeholder="写下心得、注意事项、特别推荐的理由…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">取消</button>
+      <button class="btn btn-primary" onclick="savePlace()">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="exportOverlay" onclick="closeExportOnBg(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>📤 导出集锦</h2>
+      <button class="modal-close" onclick="closeExport()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.85rem;color:var(--ink2);line-height:1.6">选择导出方式：</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:8px">
+        <button class="btn btn-green" onclick="exportHTML()">🌐 导出为独立 HTML（发给朋友直接打开）</button>
+        <button class="btn btn-ghost" onclick="exportJSON()">💾 导出 JSON（数据备份 / 未来导入）</button>
+        <button class="btn btn-ghost" onclick="exportText()">📋 导出纯文字（复制发微信/备忘录）</button>
+      </div>
+      <div id="textExportArea" style="display:none;margin-top:14px">
+        <label style="font-size:.76rem;color:var(--ink3)">点击文本框全选后复制：</label>
+        <textarea id="textExportContent" style="margin-top:6px;height:160px;font-size:.77rem;font-style:normal" onclick="this.select()" readonly></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeExport()">关闭</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CATS = ['自然/公园','博物馆/展览','观景/地标','市集/街市','花园','演出/文化','餐厅','咖啡馆','历史建筑','其他'];
+const SCENES = ['独自','带朋友','带家人','带娃','约会'];
+const STORAGE_KEY = 'london_places_v1';
+
+const DEFAULT_PLACES = [
+  {id:1,name:'白金汉宫换岗仪式',cat:'观景/地标',address:'Buckingham Palace, Westminster SW1A 1AA',url:'https://changing-guard.com/dates-buckingham-palace.html',status:'want',scenes:['带家人','带朋友','带娃'],note:'一定要提前查好日期！不是每天都有。建议早到占位，典礼约45分钟，非常壮观。',added:Date.now()-700},
+  {id:2,name:'哥伦比亚路花市',cat:'市集/街市',address:'Columbia Rd, London E2 7RG（每周日限定）',url:'https://columbiaroad.info/',status:'want',scenes:['独自','带朋友','约会'],note:'每周日8am–3pm。建议8点前到，花最新鲜人最少。逛完在旁边小店喝咖啡很惬意！',added:Date.now()-600},
+  {id:3,name:'Sky Garden 空中花园',cat:'观景/地标',address:'20 Fenchurch St, London EC3M 8AF',url:'https://skygarden.london/',status:'want',scenes:['独自','带朋友','约会','带家人'],note:'免费但必须提前官网预约！顶层360°全景，俯瞰泰晤士河，日落时分最美。',added:Date.now()-500},
+  {id:4,name:'国家美术馆',cat:'博物馆/展览',address:'Trafalgar Square, London WC2N 5DN',url:'https://www.nationalgallery.org.uk/',status:'want',scenes:['独自','带朋友','带家人','约会'],note:'永久展览免费！梵高、莫奈、达芬奇应有尽有。可顺带在特拉法加广场走走。',added:Date.now()-400},
+  {id:5,name:'Kew Gardens 皇家植物园',cat:'花园',address:'Royal Botanic Gardens, Kew, Richmond TW9 3AE',url:'https://www.kew.org/kew-gardens/',status:'want',scenes:['带家人','带朋友','独自','带娃'],note:'UNESCO世界遗产，面积超大建议穿舒适的鞋。春天樱花和郁金香特别美，玻璃暖房超出片。',added:Date.now()-300},
+  {id:6,name:'St Dunstan in the East 废墟花园',cat:'历史建筑',address:"St Dunstan's Hill, London EC3R 5DD",url:'https://maps.google.com/?q=St+Dunstan+in+the+East+London',status:'want',scenes:['独自','约会','带朋友'],note:'二战轰炸留下的教堂废墟，改建成公共花园。藤蔓覆盖残垣，Tower Bridge旁却安静得令人意外，游客极少。',added:Date.now()-200},
+  {id:7,name:'Leadenhall Market 利德贺市场',cat:'历史建筑',address:'Gracechurch St, London EC3V 1LT',url:'https://maps.google.com/?q=Leadenhall+Market+London',status:'want',scenes:['带朋友','独自','带家人'],note:'维多利亚时代拱廊市场，哈利波特对角巷取景地。周末清晨人少、拍照绝佳，旁边有特色餐厅和酒吧。',added:Date.now()-100}
+];
+
+let places=[], filters={status:'all',cats:[],scenes:[],search:''}, editingId=null;
+
+function init(){loadData();buildFilterChips();populateCatSelect();buildFormScenes();applyFilters()}
+
+function loadData(){try{const r=localStorage.getItem(STORAGE_KEY);places=r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT_PLACES))}catch{places=JSON.parse(JSON.stringify(DEFAULT_PLACES))}}
+function saveData(){localStorage.setItem(STORAGE_KEY,JSON.stringify(places))}
+
+function buildFilterChips(){
+  document.getElementById('statusChips').innerHTML=[['all','全部'],['want','⭐ 想去'],['visited','✅ 去过']].map(([v,l])=>`<span class="chip${v==='all'?' active':''}" data-status="${v}" onclick="setStatus('${v}',this)">${l}</span>`).join('');
+  document.getElementById('catChips').innerHTML=CATS.map(c=>`<span class="chip" data-cat="${c}" onclick="toggleCat('${c}',this)">${c}</span>`).join('');
+  document.getElementById('sceneChips').innerHTML=SCENES.map(s=>`<span class="chip" data-scene="${s}" onclick="toggleScene('${s}',this)">${s}</span>`).join('');
+}
+
+function setStatus(v,el){filters.status=v;document.querySelectorAll('#statusChips .chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');applyFilters()}
+function toggleCat(v,el){filters.cats.includes(v)?filters.cats=filters.cats.filter(c=>c!==v):filters.cats.push(v);el.classList.toggle('active');applyFilters()}
+function toggleScene(v,el){filters.scenes.includes(v)?filters.scenes=filters.scenes.filter(s=>s!==v):filters.scenes.push(v);el.classList.toggle('active');applyFilters()}
+function clearFilters(){filters={status:'all',cats:[],scenes:[],search:''};document.getElementById('searchInput').value='';document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));document.querySelector('[data-status="all"]').classList.add('active');applyFilters()}
+
+function applyFilters(){
+  filters.search=document.getElementById('searchInput').value.toLowerCase();
+  const sort=document.getElementById('sortSelect').value;
+  let result=places.filter(p=>{
+    if(filters.status!=='all'&&p.status!==filters.status)return false;
+    if(filters.cats.length&&!filters.cats.includes(p.cat))return false;
+    if(filters.scenes.length&&!filters.scenes.some(s=>p.scenes&&p.scenes.includes(s)))return false;
+    if(filters.search){const h=(p.name+p.address+p.note+p.cat).toLowerCase();if(!h.includes(filters.search))return false}
+    return true;
+  });
+  result.sort((a,b)=>{
+    if(sort==='name')return a.name.localeCompare(b.name,'zh');
+    if(sort==='cat')return a.cat.localeCompare(b.cat,'zh');
+    if(sort==='status')return a.status.localeCompare(b.status);
+    return(b.added||0)-(a.added||0);
+  });
+  renderCards(result);
+  document.getElementById('statTotal').textContent=places.length;
+  document.getElementById('statVisited').textContent=places.filter(p=>p.status==='visited').length;
+  document.getElementById('statWant').textContent=places.filter(p=>p.status==='want').length;
+  document.getElementById('statShown').textContent=result.length;
+  document.getElementById('gridLabel').textContent=result.length===places.length?'所有地点':'筛选结果';
+}
+
+function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+
+function renderCards(list){
+  const g=document.getElementById('cardsGrid');
+  if(!list.length){g.innerHTML='<div class="empty-state"><div class="emoji">🔍</div><h3>没有符合条件的地点</h3><p>试试调整筛选条件，或点击右上角添加新地点</p></div>';return}
+  g.innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="card-stripe ${p.status}"></div>
+      <div class="card-body">
+        <div class="card-top">
+          <div class="card-name">${esc(p.name)}</div>
+          <span class="status-badge ${p.status}">${p.status==='visited'?'✅ 去过':'⭐ 想去'}</span>
+        </div>
+        <span class="card-cat">${esc(p.cat)}</span>
+        ${p.address?`<div class="card-address">📍 ${esc(p.address)}</div>`:''}
+        ${p.note?`<div class="card-note">${esc(p.note)}</div>`:''}
+        ${(p.scenes&&p.scenes.length)?`<div class="card-scenes">${p.scenes.map(s=>`<span class="scene-tag">${s}</span>`).join('')}</div>`:''}
+      </div>
+      <div class="card-footer">
+        ${p.url?`<a class="map-link" href="${esc(p.url)}" target="_blank" rel="noopener">🗺 查看地图/官网</a>`:'<span></span>'}
+        <div class="card-actions">
+          <button class="btn btn-sm btn-ghost" onclick="openEdit(${p.id})">编辑</button>
+          <button class="btn btn-sm btn-danger" onclick="deletePlace(${p.id})">删除</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function populateCatSelect(){
+  document.getElementById('fCat').innerHTML='<option value="">选择类别…</option>'+CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+}
+function buildFormScenes(){
+  document.getElementById('fScenes').innerHTML=SCENES.map(s=>`<span class="chip-sel" data-val="${s}" onclick="this.classList.toggle('selected')">${s}</span>`).join('');
+}
+function selectStatus(el){document.querySelectorAll('#fStatus .chip-sel').forEach(e=>e.classList.remove('selected'));el.classList.add('selected')}
+
+function openAdd(){editingId=null;document.getElementById('modalTitle').textContent='添加地点';clearForm();document.getElementById('modalOverlay').classList.add('open')}
+function openEdit(id){
+  const p=places.find(x=>x.id===id);if(!p)return;
+  editingId=id;document.getElementById('modalTitle').textContent='编辑地点';
+  document.getElementById('fName').value=p.name||'';
+  document.getElementById('fCat').value=p.cat||'';
+  document.getElementById('fAddress').value=p.address||'';
+  document.getElementById('fUrl').value=p.url||'';
+  document.getElementById('fNote').value=p.note||'';
+  document.querySelectorAll('#fStatus .chip-sel').forEach(el=>el.classList.toggle('selected',el.dataset.val===p.status));
+  document.querySelectorAll('#fScenes .chip-sel').forEach(el=>el.classList.toggle('selected',!!(p.scenes&&p.scenes.includes(el.dataset.val))));
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function clearForm(){
+  ['fName','fAddress','fUrl','fNote'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fCat').value='';
+  document.querySelectorAll('#fStatus .chip-sel,#fScenes .chip-sel').forEach(el=>el.classList.remove('selected'));
+  document.querySelector('#fStatus .chip-sel[data-val="want"]').classList.add('selected');
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open')}
+function closeModalOnBg(e){if(e.target===document.getElementById('modalOverlay'))closeModal()}
+
+function savePlace(){
+  const name=document.getElementById('fName').value.trim();
+  const cat=document.getElementById('fCat').value;
+  if(!name){showToast('请填写地点名称',true);return}
+  if(!cat){showToast('请选择类别',true);return}
+  const statusEl=document.querySelector('#fStatus .chip-sel.selected');
+  const status=statusEl?statusEl.dataset.val:'want';
+  const scenes=[...document.querySelectorAll('#fScenes .chip-sel.selected')].map(el=>el.dataset.val);
+  const data={name,cat,address:document.getElementById('fAddress').value.trim(),url:document.getElementById('fUrl').value.trim(),note:document.getElementById('fNote').value.trim(),status,scenes};
+  if(editingId){
+    const i=places.findIndex(p=>p.id===editingId);
+    if(i>-1)places[i]={...places[i],...data};
+    showToast('已更新 ✓');
+  }else{
+    places.unshift({id:Date.now(),added:Date.now(),...data});
+    showToast('已添加 ✓');
+  }
+  saveData();closeModal();applyFilters();
+}
+
+function deletePlace(id){
+  const p=places.find(x=>x.id===id);if(!p)return;
+  if(!confirm(`确定删除「${p.name}」吗？`))return;
+  places=places.filter(x=>x.id!==id);saveData();applyFilters();showToast('已删除');
+}
+
+function openExport(){document.getElementById('exportOverlay').classList.add('open');document.getElementById('textExportArea').style.display='none'}
+function closeExport(){document.getElementById('exportOverlay').classList.remove('open')}
+function closeExportOnBg(e){if(e.target===document.getElementById('exportOverlay'))closeExport()}
+
+function dateStr(){return new Date().toISOString().slice(0,10)}
+function dlBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),1000)}
+
+function exportJSON(){dlBlob(new Blob([JSON.stringify(places,null,2)],{type:'application/json'}),`london-places-${dateStr()}.json`);showToast('JSON 已下载 ✓')}
+
+function exportText(){
+  const text=places.map(p=>{
+    const ls=[`【${p.cat}】${p.name}`,p.status==='visited'?'✅ 去过':'⭐ 想去'];
+    if(p.address)ls.push(`📍 ${p.address}`);
+    if(p.scenes&&p.scenes.length)ls.push(`适合：${p.scenes.join('、')}`);
+    if(p.note)ls.push(`备注：${p.note}`);
+    if(p.url)ls.push(`🔗 ${p.url}`);
+    return ls.join('\n');
+  }).join('\n\n────────────────\n\n');
+  document.getElementById('textExportContent').value=`我的伦敦集锦（共${places.length}个地点）\n生成于 ${new Date().toLocaleDateString('zh')}\n\n${'═'.repeat(28)}\n\n`+text;
+  document.getElementById('textExportArea').style.display='block';
+  document.getElementById('textExportContent').select();
+  showToast('点击文本框全选后复制');
+}
+
+function exportHTML(){
+  const visited=places.filter(p=>p.status==='visited').length;
+  const want=places.filter(p=>p.status==='want').length;
+  const cards=places.map(p=>`
+    <div class="card">
+      <div class="stripe ${p.status}"></div>
+      <div class="cbody">
+        <div class="ctop">
+          <div>
+            <span class="cat">${esc(p.cat)}</span>
+            <h3 class="cname">${esc(p.name)}</h3>
+            ${p.address?`<p class="caddr">📍 ${esc(p.address)}</p>`:''}
+          </div>
+          <span class="badge ${p.status}">${p.status==='visited'?'✅ 去过':'⭐ 想去'}</span>
+        </div>
+        ${p.note?`<p class="cnote">${esc(p.note)}</p>`:''}
+        ${(p.scenes&&p.scenes.length)?`<div class="scenes">${p.scenes.map(s=>`<span class="scene">${s}</span>`).join('')}</div>`:''}
+        ${p.url?`<a class="mlink" href="${esc(p.url)}" target="_blank">🗺 查看地图/官网</a>`:''}
+      </div>
+    </div>`).join('');
+  const html=`<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>我的伦敦集锦</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'DM Sans',sans-serif;background:#f7f2e8;color:#1c1c18}header{background:#2d4a3e;color:#f7f2e8;padding:26px 32px;text-align:center}header h1{font-family:'Playfair Display',serif;font-size:1.8rem}header p{font-size:.78rem;opacity:.6;margin-top:4px}.meta{text-align:center;padding:10px;font-size:.77rem;color:#8a8578;background:#ede6d3}.meta strong{color:#7a5c10}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;padding:24px 32px;max-width:1100px;margin:0 auto}.card{background:#fdfaf2;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(45,74,62,.09)}.stripe{height:4px}.stripe.visited{background:#2d4a3e}.stripe.want{background:#c9a24a}.cbody{padding:15px 16px 14px}.ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}.cat{font-size:.67rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#b55a3f;display:block;margin-bottom:3px}.cname{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;line-height:1.25;color:#1c1c18}.caddr{font-size:.74rem;color:#8a8578;margin-top:4px;line-height:1.4}.badge{font-size:.64rem;font-weight:600;padding:3px 8px;border-radius:12px;white-space:nowrap;flex-shrink:0}.badge.visited{background:#eaf1ed;color:#2d4a3e}.badge.want{background:#f0e4c0;color:#7a5c10}.cnote{font-size:.79rem;color:#4a4840;line-height:1.55;font-style:italic;margin:8px 0}.scenes{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0}.scene{font-size:.65rem;padding:2px 7px;border-radius:10px;background:#ede6d3;color:#4a4840;font-weight:500}.mlink{font-size:.74rem;color:#3e6b58;text-decoration:none;font-weight:500;display:inline-block;margin-top:8px}footer{text-align:center;padding:24px;font-size:.75rem;color:#8a8578}@media(max-width:500px){.grid{padding:14px 12px}}</style>
+</head><body>
+<header><h1>🗺 我的伦敦集锦</h1><p>London Places · Shared Collection</p></header>
+<div class="meta">共 <strong>${places.length}</strong> 个地点 &nbsp;·&nbsp; ✅ 去过 <strong>${visited}</strong> &nbsp;·&nbsp; ⭐ 想去 <strong>${want}</strong> &nbsp;·&nbsp; 生成于 ${new Date().toLocaleDateString('zh')}</div>
+<div class="grid">${cards}</div>
+<footer>由「我的伦敦集锦」工具生成</footer>
+</body></html>`;
+  dlBlob(new Blob([html],{type:'text/html'}),`london-places-${dateStr()}.html`);
+  showToast('HTML 页面已下载 ✓');
+}
+
+function showToast(msg,err=false){
+  const t=document.getElementById('toast');t.textContent=msg;
+  t.style.background=err?'#b55a3f':'var(--green)';
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+init();
+</script>
+</body>
+</html>
