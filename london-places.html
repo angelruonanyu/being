@@ -81,19 +81,12 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 .toast{position:fixed;bottom:26px;right:26px;background:var(--green);color:var(--cream);padding:11px 18px;border-radius:9px;font-size:.84rem;box-shadow:var(--shadow-lg);z-index:200;transform:translateY(18px);opacity:0;transition:all .22s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
 
-.import-preview-list{display:flex;flex-direction:column;gap:10px;margin-top:4px;max-height:360px;overflow-y:auto}
-.import-card{background:var(--cream);border:1.5px solid var(--parchment);border-radius:10px;padding:13px 15px;position:relative}
+.import-preview-list{display:flex;flex-direction:column;gap:10px;margin-top:4px;max-height:380px;overflow-y:auto}
+.import-card{background:var(--cream);border:1.5px solid var(--parchment);border-radius:10px;padding:13px 15px}
 .import-card.accepted{border-color:var(--green);background:var(--green-pale)}
-.import-card.rejected{opacity:.4;border-color:var(--parchment)}
 .import-card-name{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;margin-bottom:3px}
 .import-card-meta{font-size:.75rem;color:var(--ink3);margin-bottom:5px}
 .import-card-note{font-size:.78rem;color:var(--ink2);font-style:italic;line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.import-card-actions{display:flex;gap:6px;align-items:center}
-.import-status{font-size:.7rem;font-weight:600;margin-left:auto}
-.import-status.ok{color:var(--green)}.import-status.skip{color:var(--ink3)}
-.parsing-state{text-align:center;padding:32px 20px;color:var(--ink3)}
-.parsing-state .spin{font-size:1.8rem;display:block;margin-bottom:10px;animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:640px){header,.filter-panel,main,.stats-bar{padding-left:16px;padding-right:16px}.form-row{grid-template-columns:1fr}.cards-grid{grid-template-columns:1fr}.header-title h1{font-size:1.5rem}}
 </style>
 </head>
@@ -233,32 +226,33 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
 <div class="modal-overlay" id="importOverlay" onclick="closeImportOnBg(event)">
   <div class="modal" style="max-width:580px">
     <div class="modal-header">
-      <h2>✨ 智能导入</h2>
+      <h2>✨ 导入推荐</h2>
       <button class="modal-close" onclick="closeImport()">✕</button>
     </div>
     <div class="modal-body">
       <div id="importStep1">
-        <p style="font-size:.84rem;color:var(--ink2);line-height:1.6;margin-bottom:10px">把 Claude 的推荐文字直接粘贴进来，AI 会自动识别地点信息：</p>
-        <textarea id="importText" style="height:140px;font-size:.82rem" placeholder="例如：
-**🌿 Seeds of Exchange @ Garden Museum**
-探讨18世纪广州与伦敦之间植物贸易历史
-📍 Garden Museum, Lambeth Palace Rd, SE1 7LB
-🗓 现在开放 · 免费
-🔗 https://gardenmuseum.org.uk"></textarea>
+        <p style="font-size:.84rem;color:var(--ink2);line-height:1.6;margin-bottom:10px">把 Claude 推荐末尾附带的 <code style="background:var(--cream2);padding:1px 5px;border-radius:4px;font-size:.8rem">JSON</code> 代码粘贴进来，一键导入所有地点：</p>
+        <textarea id="importText" style="height:160px;font-size:.78rem;font-family:monospace" placeholder='[
+  {
+    "name": "Seeds of Exchange",
+    "cat": "博物馆/展览",
+    "address": "Garden Museum, SE1 7LB",
+    "url": "https://gardenmuseum.org.uk",
+    "note": "中英植物贸易历史，免费",
+    "status": "want",
+    "scenes": ["独自", "带朋友"]
+  }
+]'></textarea>
         <div style="margin-top:10px;display:flex;justify-content:flex-end">
-          <button class="btn btn-primary" onclick="runImportParse()">🔍 解析地点</button>
+          <button class="btn btn-primary" onclick="runImportParse()">📋 解析预览</button>
         </div>
       </div>
       <div id="importStep2" style="display:none">
-        <div id="importParsingState" class="parsing-state">
-          <span class="spin">⚙️</span>
-          <p style="font-size:.85rem">正在识别地点信息…</p>
-        </div>
-        <div id="importPreviewList" class="import-preview-list" style="display:none"></div>
+        <div id="importPreviewList" class="import-preview-list"></div>
       </div>
     </div>
     <div class="modal-footer" id="importFooter" style="display:none">
-      <button class="btn btn-ghost" onclick="closeImport()">取消</button>
+      <button class="btn btn-ghost" onclick="resetImport()">← 重新粘贴</button>
       <button class="btn btn-ghost" onclick="importToggleAll(false)">全部跳过</button>
       <button class="btn btn-primary" onclick="confirmImport()">保存选中地点</button>
     </div>
@@ -477,103 +471,64 @@ let importResults = [];
 
 function openImport(){
   document.getElementById('importOverlay').classList.add('open');
+  resetImport();
+}
+function closeImport(){document.getElementById('importOverlay').classList.remove('open')}
+function closeImportOnBg(e){if(e.target===document.getElementById('importOverlay'))closeImport()}
+function resetImport(){
   document.getElementById('importStep1').style.display='block';
   document.getElementById('importStep2').style.display='none';
   document.getElementById('importFooter').style.display='none';
   document.getElementById('importText').value='';
   importResults=[];
 }
-function closeImport(){document.getElementById('importOverlay').classList.remove('open')}
-function closeImportOnBg(e){if(e.target===document.getElementById('importOverlay'))closeImport()}
 
-async function runImportParse(){
+function runImportParse(){
   const text = document.getElementById('importText').value.trim();
-  if(!text){showToast('请先粘贴推荐文字',true);return}
-  document.getElementById('importStep1').style.display='none';
-  document.getElementById('importStep2').style.display='block';
-  document.getElementById('importParsingState').style.display='block';
-  document.getElementById('importPreviewList').style.display='none';
-  document.getElementById('importFooter').style.display='none';
-
-  const CATS_LIST = CATS.join('、');
-  const SCENES_LIST = SCENES.join('、');
-  const prompt = `你是一个信息提取助手。从以下推荐文字中提取所有地点信息，每个地点提取为一个JSON对象。
-
-字段说明：
-- name: 地点名称（中英文都保留）
-- cat: 类别，必须从以下选一个：${CATS_LIST}
-- address: 地址（如有）
-- url: 链接（如有，必须是完整URL）
-- note: 备注/推荐理由（用中文简洁描述，保留原文精华）
-- status: 固定为 "want"
-- scenes: 适合场景数组，从以下选：${SCENES_LIST}，可多选，根据内容推断
-
-返回格式：只返回一个JSON数组，不要任何其他文字，不要markdown代码块。
-例：[{"name":"XX","cat":"花园","address":"XX","url":"https://xx","note":"XX","status":"want","scenes":["独自","带朋友"]}]
-
-推荐文字：
-${text}`;
-
+  if(!text){showToast('请先粘贴 JSON 内容',true);return}
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        messages:[{role:'user',content:prompt}]
-      })
-    });
-    const data = await resp.json();
-    const raw = data.content?.find(b=>b.type==='text')?.text || '[]';
-    const cleaned = raw.replace(/```json|```/g,'').trim();
-    importResults = JSON.parse(cleaned).map((p,i)=>({...p, _id:i, _accepted:true}));
+    const cleaned = text.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(cleaned);
+    const arr = Array.isArray(parsed) ? parsed : [parsed];
+    importResults = arr.map((p,i)=>({...p, _id:i, _accepted:true}));
+    if(!importResults.length){showToast('未找到任何地点',true);return}
     renderImportPreview();
   } catch(e) {
-    document.getElementById('importParsingState').innerHTML='<p style="color:var(--terracotta);font-size:.85rem">解析失败，请检查网络或稍后重试</p>';
-    console.error(e);
+    showToast('JSON 格式有误，请检查后重试',true);
   }
 }
 
 function renderImportPreview(){
   const list = document.getElementById('importPreviewList');
-  document.getElementById('importParsingState').style.display='none';
-  list.style.display='flex';
+  document.getElementById('importStep1').style.display='none';
+  document.getElementById('importStep2').style.display='block';
   document.getElementById('importFooter').style.display='flex';
-
   list.innerHTML = importResults.map(p=>`
     <div class="import-card ${p._accepted?'accepted':''}" id="icard-${p._id}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
         <div style="flex:1">
           <div class="import-card-name">${esc(p.name)}</div>
-          <div class="import-card-meta">${esc(p.cat)}${p.address?' · 📍'+esc(p.address):''}${p.url?' · <a href="'+esc(p.url)+'" target="_blank" style="color:var(--green-mid)">链接</a>':''}</div>
+          <div class="import-card-meta">${esc(p.cat||'')}${p.address?' · 📍'+esc(p.address):''}${p.url?' · <a href="'+esc(p.url)+'" target="_blank" style="color:var(--green-mid)">链接</a>':''}</div>
           ${p.note?`<div class="import-card-note">${esc(p.note)}</div>`:''}
-          ${(p.scenes&&p.scenes.length)?`<div style="display:flex;gap:4px;flex-wrap:wrap">${p.scenes.map(s=>`<span class="scene-tag">${s}</span>`).join('')}</div>`:''}
+          ${(p.scenes&&p.scenes.length)?`<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">${p.scenes.map(s=>`<span class="scene-tag">${s}</span>`).join('')}</div>`:''}
         </div>
-        <button class="btn btn-sm ${p._accepted?'btn-danger':'btn-ghost'}" onclick="toggleImportCard(${p._id})">
-          ${p._accepted?'跳过':'加回'}
-        </button>
+        <button class="btn btn-sm ${p._accepted?'btn-danger':'btn-ghost'}" onclick="toggleImportCard(${p._id})">${p._accepted?'跳过':'加回'}</button>
       </div>
     </div>`).join('');
 }
 
 function toggleImportCard(id){
-  const p = importResults.find(x=>x._id===id);
+  const p=importResults.find(x=>x._id===id);
   if(!p)return;
-  p._accepted = !p._accepted;
+  p._accepted=!p._accepted;
   renderImportPreview();
 }
-
-function importToggleAll(val){
-  importResults.forEach(p=>p._accepted=val);
-  renderImportPreview();
-}
-
+function importToggleAll(val){importResults.forEach(p=>p._accepted=val);renderImportPreview()}
 function confirmImport(){
-  const toAdd = importResults.filter(p=>p._accepted);
+  const toAdd=importResults.filter(p=>p._accepted);
   if(!toAdd.length){showToast('没有选中任何地点',true);return}
   toAdd.forEach(p=>{
-    const {_id,_accepted,...data} = p;
+    const{_id,_accepted,...data}=p;
     places.unshift({id:Date.now()+Math.random(),added:Date.now(),...data});
   });
   saveData();applyFilters();closeImport();
