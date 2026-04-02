@@ -23,7 +23,6 @@
   .plane-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
   h1 { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.4rem; }
   .subtitle { font-size: 13px; color: var(--muted); font-weight: 300; }
-
   .paste-card { background: #fff; border: 1.5px dashed var(--border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem; transition: border-color 0.2s; }
   .paste-card:focus-within { border-color: var(--accent); }
   .paste-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
@@ -32,11 +31,9 @@
   textarea::placeholder { color: #c5c0bb; }
   .parse-btn { width: 100%; padding: 11px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 10px; transition: all 0.15s; }
   .parse-btn:hover { background: #b5561f; }
-
   .divider { display: flex; align-items: center; gap: 12px; margin: 1.25rem 0; }
   .divider-line { flex: 1; height: 0.5px; background: var(--border); }
   .divider-text { font-size: 11px; color: var(--muted); }
-
   .card { background: #fff; border: 0.5px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 1rem; }
   .card-label { font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
   .field { margin-bottom: 1.1rem; }
@@ -45,24 +42,19 @@
   input, select { width: 100%; padding: 10px 12px; border: 0.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); background: var(--paper); outline: none; transition: border-color 0.15s; -webkit-appearance: none; }
   input:focus, select:focus { border-color: var(--accent); background: #fff; }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
   .parsed-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 20px; background: var(--green-light); color: var(--green); font-weight: 500; margin-left: 8px; vertical-align: middle; }
   .type-toggle { display: flex; background: var(--border); border-radius: 10px; padding: 3px; margin-bottom: 1rem; gap: 3px; }
   .type-btn { flex: 1; padding: 9px; border: none; border-radius: 8px; background: transparent; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--muted); transition: all 0.15s; }
   .type-btn.active { background: #fff; color: var(--ink); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-
   .generate-btn { width: 100%; padding: 14px; background: var(--ink); color: #fff; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.15s; margin-top: 0.5rem; }
   .generate-btn:hover { background: #2c2a27; transform: translateY(-1px); }
-
   .success { background: var(--green-light); border: 0.5px solid #a8d5bc; border-radius: 10px; padding: 14px 16px; margin-top: 1rem; display: none; align-items: center; gap: 10px; }
   .success.show { display: flex; }
   .success-text { font-size: 13px; color: var(--green); }
   .success-text strong { display: block; font-weight: 500; }
-
   .preview-wrap { display: none; margin-top: 1rem; }
   .preview-label { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 500; }
   .preview { background: #f7f5f2; border-radius: 10px; padding: 14px; font-size: 12px; line-height: 1.8; color: var(--ink); white-space: pre-wrap; border: 0.5px solid var(--border); }
-
   .error-msg { background: #fff5f5; border: 0.5px solid #fcc; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #c0392b; margin-top: 8px; display: none; }
   .error-msg.show { display: block; }
 </style>
@@ -134,7 +126,7 @@ Heathrow T2 CA423
     <div class="field"><label>住宿地址</label><input type="text" id="address" placeholder="例：303"></div>
   </div>
 
- <div class="card" id="departure-card" style="display:none">
+  <div class="card" id="departure-card" style="display:none">
     <div class="card-label">送机安排</div>
     <div class="row-2">
       <div class="field"><label>送机人</label><input type="text" id="dropoff" placeholder="例：Angel"></div>
@@ -207,9 +199,10 @@ function parseText() {
   if (!text.trim()) { err.classList.add('show'); return; }
 
   try {
-    if (text.includes('送机信息')) setType('departure'); else setType('arrival');
+    const isDeparture = text.includes('送机信息');
+    if (isDeparture) setType('departure'); else setType('arrival');
 
-    const set = (id, val) => { if (val) document.getElementById(id).value = val; };
+    const set = (id, val) => { if (val && document.getElementById(id)) document.getElementById(id).value = val; };
 
     const personMatch = text.match(/人员[：:]\s*(.+)/);
     set('person', personMatch?.[1]?.trim());
@@ -224,7 +217,6 @@ function parseText() {
       set('flight-date', iso);
       set('flight-time', time);
 
-      // auto depart: 80 mins before
       const [h,m2] = time.split(':').map(Number);
       const total = h*60+m2-30;
       const dh = Math.floor(((total%1440)+1440)%1440/60);
@@ -245,18 +237,35 @@ function parseText() {
       }
     }
 
-    const fieldMap = [
-      ['address','住宿地址'],['contact','住宿联络人'],
-      ['pickup','接机'],['escort','跟车'],['meal','备餐'],['dropoff','送机'],
-    ];
-    fieldMap.forEach(([id, label]) => {
-      const m = text.match(new RegExp(label+'[：:]\\s*(.+)'));
-      set(id, m?.[1]?.trim());
-    });
+    if (isDeparture) {
+      // 送机字段
+      const fieldMap = [
+        ['dropoff', '送机'],
+        ['escort-dep', '跟车'],
+        ['meal-dep', '备餐'],
+      ];
+      fieldMap.forEach(([id, label]) => {
+        const m = text.match(new RegExp(label+'[：:]\\s*(.+)'));
+        set(id, m?.[1]?.trim());
+      });
+    } else {
+      // 接机字段
+      const fieldMap = [
+        ['address', '住宿地址'],
+        ['contact', '住宿联络人'],
+        ['pickup', '接机'],
+        ['escort', '跟车'],
+        ['meal', '备餐'],
+      ];
+      fieldMap.forEach(([id, label]) => {
+        const m = text.match(new RegExp(label+'[：:]\\s*(.+)'));
+        set(id, m?.[1]?.trim());
+      });
+    }
 
     document.getElementById('parsed-badge').style.display = 'inline-block';
   } catch(e) {
-    err.classList.add('show');
+    document.getElementById('parse-error').classList.add('show');
   }
 }
 
@@ -297,10 +306,12 @@ function generate() {
       +(escort?`\n跟车：${escort}`:'')
       +(meal?`\n备餐：${meal}`:'');
   } else {
-    const dropoff=g('dropoff'),mealDep=g('meal-dep');
+    const dropoff=g('dropoff'), escortDep=g('escort-dep'), mealDep=g('meal-dep');
     summary=`${person}送机 ${pad(ftH)}:${pad(ftM)} ✈️ ${flightNum}`;
-    const escortDep = document.getElementById('escort-dep').value.trim();
-msg = `📤送机信息\n\n人员：${person}\n\n航班信息：\n${formatDateDisplay(flightDate)} ${pad(ftH)}:${pad(ftM)}\n${terminal} ${flightNum}\n\n送机：${dropoff}${escortDep ? '\n跟车：' + escortDep : ''}\n备餐：${mealDep}`;
+    msg=`📤送机信息\n\n人员：${person}\n\n航班信息：\n${formatDateDisplay(flightDate)} ${pad(ftH)}:${pad(ftM)}\n${terminal} ${flightNum}`
+      +(dropoff?`\n\n送机：${dropoff}`:'')
+      +(escortDep?`\n跟车：${escortDep}`:'')
+      +(mealDep?`\n备餐：${mealDep}`:'');
   }
 
   const alarmBlock = reminder>0
