@@ -238,16 +238,12 @@ function parseText() {
     }
 
     if (isDeparture) {
-      // 送机字段
-      const fieldMap = [
-        ['dropoff', '送机'],
-        ['escort-dep', '跟车'],
-        ['meal-dep', '备餐'],
-      ];
-      fieldMap.forEach(([id, label]) => {
-        const m = text.match(new RegExp(label+'[：:]\\s*(.+)'));
-        set(id, m?.[1]?.trim());
-      });
+      const dropoffMatch = text.match(/^送机[：:]\s*(.+)/m);
+      set('dropoff', dropoffMatch?.[1]?.trim());
+      const escortDepMatch = text.match(/^跟车[：:]\s*(.+)/m);
+      set('escort-dep', escortDepMatch?.[1]?.trim());
+      const mealDepMatch = text.match(/^备餐[：:]\s*(.+)/m);
+      set('meal-dep', mealDepMatch?.[1]?.trim());
     } else {
       // 接机字段
       const fieldMap = [
@@ -258,7 +254,7 @@ function parseText() {
         ['meal', '备餐'],
       ];
       fieldMap.forEach(([id, label]) => {
-        const m = text.match(new RegExp(label+'[：:]\\s*(.+)'));
+        const m = text.match(new RegExp('^'+label+'[：:]\\s*(.+)', 'm'));
         set(id, m?.[1]?.trim());
       });
     }
