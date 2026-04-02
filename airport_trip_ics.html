@@ -134,12 +134,13 @@ Heathrow T2 CA423
     <div class="field"><label>住宿地址</label><input type="text" id="address" placeholder="例：303"></div>
   </div>
 
-  <div class="card" id="departure-card" style="display:none">
+ <div class="card" id="departure-card" style="display:none">
     <div class="card-label">送机安排</div>
     <div class="row-2">
       <div class="field"><label>送机人</label><input type="text" id="dropoff" placeholder="例：Angel"></div>
-      <div class="field"><label>备餐</label><input type="text" id="meal-dep" placeholder="例：303"></div>
+      <div class="field"><label>跟车</label><input type="text" id="escort-dep" placeholder="例：超然"></div>
     </div>
+    <div class="field"><label>备餐</label><input type="text" id="meal-dep" placeholder="例：303"></div>
   </div>
 
   <div class="card">
@@ -298,9 +299,8 @@ function generate() {
   } else {
     const dropoff=g('dropoff'),mealDep=g('meal-dep');
     summary=`${person}送机 ${pad(ftH)}:${pad(ftM)} ✈️ ${flightNum}`;
-    msg=`📤送机信息\n\n人员：${person}\n\n航班信息：\n${formatDateDisplay(flightDate)} ${pad(ftH)}:${pad(ftM)}\n${terminal} ${flightNum}`
-      +(dropoff?`\n\n送机：${dropoff}`:'')
-      +(mealDep?`\n备餐：${mealDep}`:'');
+    const escortDep = document.getElementById('escort-dep').value.trim();
+msg = `📤送机信息\n\n人员：${person}\n\n航班信息：\n${formatDateDisplay(flightDate)} ${pad(ftH)}:${pad(ftM)}\n${terminal} ${flightNum}\n\n送机：${dropoff}${escortDep ? '\n跟车：' + escortDep : ''}\n备餐：${mealDep}`;
   }
 
   const alarmBlock = reminder>0
