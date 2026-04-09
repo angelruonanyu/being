@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Being — Social Media Copy · 9 May 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #2d4278;
+    --gold:       #B8913A;
+    --paper:      #F7F4EE;
+    --paper-dark: #EDE8DC;
+    --muted:      #7A7A8A;
+    --text:       #1a1a1a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .header {
+    background: var(--navy);
+    color: var(--paper);
+    padding: 56px 48px 48px;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Vollkorn', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(247,244,238,0.65);
+    letter-spacing: 0.04em;
+  }
+  .gold-bar { height: 3px; background: var(--gold); }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { padding: 52px 0 0; }
+  section:last-child { padding-bottom: 72px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--paper-dark);
+  }
+
+  /* Post block */
+  .post-block {
+    margin-bottom: 40px;
+    border: 1px solid var(--paper-dark);
+  }
+  .post-header {
+    background: var(--paper-dark);
+    padding: 14px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .post-number {
+    font-family: 'Vollkorn', serif;
+    font-size: 22px;
+    color: var(--gold);
+  }
+  .post-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .post-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.03em;
+  }
+
+  .account-block {
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .account-block:last-child { border-bottom: none; }
+
+  .account-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+  .account-tag.being { background: var(--navy); color: var(--paper); }
+  .account-tag.moonstruck { background: #3a3a3a; color: var(--paper); }
+  .account-tag.both { background: var(--gold); color: white; }
+
+  .copy-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #2a2a2a;
+    white-space: pre-wrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .copy-text strong { color: var(--navy); font-weight: 500; }
+
+  .story-slide {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--gold);
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 13.5px;
+    color: #2a2a2a;
+    line-height: 1.6;
+  }
+  .story-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .hashtags {
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .note-box {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--gold);
+    padding: 16px 22px;
+    font-size: 13.5px;
+    color: #2a2a2a;
+    line-height: 1.6;
+    margin-top: 32px;
+  }
+
+  /* Luma section */
+  .luma-block {
+    border: 1px solid var(--paper-dark);
+    padding: 28px;
+    margin-top: 16px;
+  }
+  .luma-field {
+    margin-bottom: 20px;
+  }
+  .luma-field:last-child { margin-bottom: 0; }
+  .luma-field-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .luma-field-value {
+    font-size: 14px;
+    color: #2a2a2a;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+  .luma-field-value strong { color: var(--navy); font-weight: 500; }
+
+  .footer {
+    background: var(--navy);
+    padding: 32px 48px;
+    color: rgba(247,244,238,0.55);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .header { padding: 36px 24px 32px; }
+    .container { padding: 0 20px; }
+    .footer { padding: 24px; }
+    .post-meta { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Social Media Copy</div>
+  <h1>Brew &amp; Being<br>at Moonstruck</h1>
+  <div class="header-sub">Saturday 9 May 2026 &nbsp;·&nbsp; @livingwell_being &amp; @moonstruck.cafe</div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="container">
+
+  <!-- ── Post 1 ── -->
+  <section>
+    <div class="section-label">Promotion posts</div>
+
+    <div class="post-block">
+      <div class="post-header">
+        <span class="post-number">01</span>
+        <span class="post-title">Launch — IG feed post + story</span>
+        <span class="post-meta">Mon 20 April · Tickets live</span>
+      </div>
+
+      <div class="account-block">
+        <div class="account-tag being">@livingwell_being</div>
+        <div class="copy-text">Come for the coffee. Stay for the people.
+
+On 9 May, we're hosting the first Brew &amp; Being at <strong>Moonstruck Cafe</strong> — an evening of light-roast coffee, hand-brewed Chinese tea, rose Basque cheesecake, and honest conversation.
+
+12–15 people. One table.
+
+<strong>The evening:</strong>
+We will have a single-origin coffee tasting and a Chinese tea ceremony by hand. We eat. We talk. We slow down. Together.
+
+Tickets from £32. Capacity is small by design.
+
+Link in bio → or search <strong>Brew &amp; Being</strong> on Luma.
+
+—
+
+<em>"To live well is the most important work we'll ever do."</em>
+Living Well Initiative · beinghome.uk</div>
+        <div class="hashtags">#BrewAndBeing #LivingWellInitiative #LondonEvents #IntentionalLiving #SpecialtyCoffee #ChineseTea #ConsciousLiving #MoonstruckCafe</div>
+      </div>
+
+      <div class="account-block">
+        <div class="account-tag moonstruck">@moonstruck.cafe</div>
+        <div class="copy-text">Something a little different is coming to Moonstruck.
+
+On <strong>9 May</strong>, we're collaborating with <strong>@livingwell_being</strong> for the first Brew &amp; Being, a slow evening built around coffee, Chinese tea, cheesecake, and real conversation.
+
+You'll enjoy a light-roast coffee tasting and hand-brew Chinese tea. And then we'll simply eat and talk.
+
+12–15 guests. One evening. Tickets from £32.
+
+Link in bio → Luma · <strong>Brew &amp; Being at Moonstruck</strong></div>
+        <div class="hashtags">#BrewAndBeing #MoonstruckCafe #LondonCoffee #SpecialtyCoffee #SlowCoffee #LondonEvents #ConsciousLiving</div>
+      </div>
+
+      <div class="account-block">
+        <div class="account-tag both">Story — both accounts</div>
+        <div class="story-label">Slide 1</div>
+        <div class="story-slide">We're hosting something.<br>9 May · Moonstruck Cafe<br>Coffee · Tea · Cheesecake · Conversation<br><br>[Ticket link sticker: "Get your spot"]</div>
+        <div style="height:8px;"></div>
+        <div class="story-label">Slide 2</div>
+        <div class="story-slide">Brew &amp; Being is a gathering of 12–15 people who want to take life a little more seriously together.<br>Small. Intentional. Warm.<br>Tickets from £32.</div>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-block">
+      <div class="post-header">
+        <span class="post-number">02</span>
+        <span class="post-title">Midpoint reminder — story only</span>
+        <span class="post-meta">Tue 28 April · ~11 days before</span>
+      </div>
+      <div class="account-block">
+        <div class="account-tag both">Story — both accounts</div>
+        <div class="story-slide">A few spots still open for 9 May.<br>Coffee · Tea · Cheesecake · Good people.<br>[Ticket link sticker]</div>
+        <div style="margin-top:12px; font-size:13px; color:var(--muted);">Keep it simple — text on brand paper background or a quiet photo of the space.</div>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="post-block">
+      <div class="post-header">
+        <span class="post-number">03</span>
+        <span class="post-title">Behind the scenes — feed or story</span>
+        <span class="post-meta">Mon 4 May · @livingwell_being only</span>
+      </div>
+      <div class="account-block">
+        <div class="account-tag being">@livingwell_being</div>
+        <div class="copy-text">Cheesecake in progress for 9 May.
+
+Rose Basque cheesecake — one of those things you make with your hands and hope for the best. It usually comes out right.
+
+See you Saturday at @moonstruck.cafe.
+
+[Link in bio]</div>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post-block">
+      <div class="post-header">
+        <span class="post-number">04</span>
+        <span class="post-title">"Tomorrow evening" — story only</span>
+        <span class="post-meta">Fri 8 May · Day before</span>
+      </div>
+      <div class="account-block">
+        <div class="account-tag both">Story — both accounts</div>
+        <div class="story-slide">Tomorrow evening.<br>7:00 pm · Moonstruck Cafe<br>[Ticket link sticker]</div>
+      </div>
+    </div>
+
+    <!-- Post 5 -->
+    <div class="post-block">
+      <div class="post-header">
+        <span class="post-number">05</span>
+        <span class="post-title">Post-event recap — feed post</span>
+        <span class="post-meta">Sun 10 May · Day after</span>
+      </div>
+
+      <div class="account-block">
+        <div class="account-tag being">@livingwell_being</div>
+        <div class="copy-text">That was the first one.
+
+Thank you to everyone who came on Saturday and to the Moonstruck team for holding us so well.
+
+There will be more. If you'd like to know when, you know where to find us.</div>
+        <div class="hashtags">#BrewAndBeing #LivingWellInitiative #MoonstruckCafe #LondonEvents</div>
+      </div>
+
+      <div class="account-block">
+        <div class="account-tag moonstruck">@moonstruck.cafe</div>
+        <div class="copy-text">We hosted something different on Saturday.
+
+Brew &amp; Being with coffee, Chinese tea, cheesecake, and a room full of people who actually wanted to be there.
+
+It was good. We'll do it again.
+
+With @livingwell_being · More dates coming.</div>
+        <div class="hashtags">#BrewAndBeing #MoonstruckCafe #LondonCoffee</div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      Tag <strong>@moonstruck.cafe</strong> in all Being posts. Tag <strong>@livingwell_being</strong> in all Moonstruck posts. Use the same hero image across both accounts for the launch post — agree on one photo for visual cohesion.
+    </div>
+  </section>
+
+  <!-- ── Luma copy ── -->
+  <section>
+    <div class="section-label">Luma event listing</div>
+    <div class="luma-block">
+
+      <div class="luma-field">
+        <div class="luma-field-label">Event title</div>
+        <div class="luma-field-value" style="font-family:'Vollkorn',serif; font-size:20px; color:var(--navy);">Brew &amp; Being at Moonstruck</div>
+      </div>
+
+      <div class="luma-field">
+        <div class="luma-field-label">Tagline</div>
+        <div class="luma-field-value">Come for the coffee. Stay for the people. Leave with something that matters.</div>
+      </div>
+
+      <div class="luma-field">
+        <div class="luma-field-label">Description</div>
+        <div class="luma-field-value">Brew &amp; Being is a gathering of 12–15 people around coffee, tea, and honest conversation.
+
+On 9 May, we're at Moonstruck Cafe in London — one of the city's rare spaces where slowness is already a choice. We will lead a light-roast, single-origin coffee tasting and hand-brew Chinese tea. Then we'll eat rose Basque cheesecake together and talk, about what we're carrying, what we keep forgetting to notice, and how we want to live.
+
+Just a room of people who want to take life a little more seriously, together.
+
+<strong>The evening:</strong>
+7:00 — Doors open
+7:10 — Coffee tasting
+7:30 — A moment of quiet
+7:35 — Chinese tea + Living Well Initiative
+8:20 — Rose Basque cheesecake + open conversation
+8:50 — Close + linger
+
+<strong>Tickets include:</strong> coffee tasting, hand-brewed Chinese tea, rose Basque cheesecake.
+
+Capacity: 15 guests. Small by design.
+
+<strong>Hosted by:</strong> Angel Ruonan Yu (Being / Living Well Initiative), in collaboration with Moonstruck Cafe.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span>Brew &amp; Being · Being Commons Ltd · Company No. 16140271</span>
+  <span>Prepared by Angel Ruonan Yu · <a href="mailto:angel@beinghome.uk">angel@beinghome.uk</a></span>
+</div>
+
+</body>
+</html>

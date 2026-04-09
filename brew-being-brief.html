@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Being — Event Brief · 9 May 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #2d4278;
+    --gold:       #B8913A;
+    --paper:      #F7F4EE;
+    --paper-dark: #EDE8DC;
+    --muted:      #7A7A8A;
+    --text:       #1a1a1a;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .header {
+    background: var(--navy);
+    color: var(--paper);
+    padding: 56px 48px 48px;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .header h1 {
+    font-family: 'Vollkorn', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: rgba(247,244,238,0.65);
+    letter-spacing: 0.04em;
+  }
+
+  .gold-bar { height: 3px; background: var(--gold); }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { padding: 52px 0 0; }
+  section:last-child { padding-bottom: 72px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--paper-dark);
+  }
+
+  h2 {
+    font-family: 'Vollkorn', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  p { margin-bottom: 12px; color: #2a2a2a; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── Fact row ── */
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--paper-dark);
+    border: 1px solid var(--paper-dark);
+    margin-bottom: 40px;
+  }
+  .fact { background: var(--paper); padding: 20px 24px; }
+  .fact-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .fact-value {
+    font-family: 'Vollkorn', serif;
+    font-size: 17px;
+    color: var(--navy);
+  }
+
+  /* ── Run of Show ── */
+  .run-of-show { border-left: 2px solid var(--paper-dark); margin: 4px 0; }
+  .ros-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    padding: 18px 0 18px 24px;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .ros-item:last-child { border-bottom: none; }
+  .ros-time {
+    font-family: 'Vollkorn', serif;
+    font-size: 15px;
+    color: var(--gold);
+    padding-top: 2px;
+    white-space: nowrap;
+  }
+  .ros-title { font-weight: 500; color: var(--navy); margin-bottom: 3px; font-size: 15px; }
+  .ros-note { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Responsibility split ── */
+  .split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--paper-dark);
+  }
+  .split-col { background: var(--paper); padding: 28px; }
+  .split-col h3 {
+    font-family: 'Vollkorn', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--paper-dark);
+  }
+  .split-col ul { list-style: none; padding: 0; }
+  .split-col ul li {
+    font-size: 14px;
+    color: #2a2a2a;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--paper-dark);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .split-col ul li:last-child { border-bottom: none; }
+  .split-col ul li::before { content: '—'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .split-col ul li em { color: var(--muted); font-style: normal; font-size: 13px; }
+
+  /* ── Ticket table ── */
+  .ticket-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  .ticket-table th {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--paper-dark);
+    border-bottom: 1px solid #D8D3C8;
+  }
+  .ticket-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--paper-dark);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .ticket-table tr:last-child td { border-bottom: none; }
+  .ticket-table .price { font-family: 'Vollkorn', serif; font-size: 17px; color: var(--navy); }
+  .ticket-table .tier { font-weight: 500; color: var(--navy); }
+
+  .revenue-example {
+    background: var(--paper-dark);
+    padding: 20px 24px;
+    margin-top: 24px;
+    font-size: 13.5px;
+  }
+  .revenue-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .revenue-row:last-child { border-bottom: none; }
+  .revenue-row.total {
+    font-weight: 500;
+    color: var(--navy);
+    border-top: 1px solid var(--muted);
+    margin-top: 4px;
+    padding-top: 10px;
+  }
+
+  .platform-box { border: 1px solid var(--paper-dark); padding: 28px; margin-bottom: 24px; }
+  .platform-name { font-family: 'Vollkorn', serif; font-size: 20px; color: var(--navy); margin-bottom: 4px; }
+  .platform-url { font-size: 12px; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 16px; display: block; }
+
+  /* ── Promo timeline ── */
+  .promo-timeline { display: grid; gap: 1px; background: var(--paper-dark); }
+  .promo-item { display: grid; grid-template-columns: 130px 1fr; background: var(--paper); gap: 0; }
+  .promo-date {
+    padding: 16px 20px;
+    background: var(--paper-dark);
+    font-size: 13px;
+    color: var(--navy);
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .promo-date span { font-size: 11px; color: var(--muted); font-weight: 400; }
+  .promo-content { padding: 16px 20px; font-size: 13.5px; }
+  .promo-content strong { color: var(--navy); font-size: 13px; display: block; margin-bottom: 3px; }
+  .promo-tags { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    background: var(--paper-dark);
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .tag.being { background: var(--navy); color: var(--paper); }
+  .tag.moonstruck { background: #3a3a3a; color: var(--paper); }
+
+  /* ── Logistics ── */
+  .logistics-table { width: 100%; font-size: 14px; }
+  .logistics-table tr { border-bottom: 1px solid var(--paper-dark); }
+  .logistics-table tr:last-child { border-bottom: none; }
+  .logistics-table td { padding: 12px 0; vertical-align: top; }
+  .logistics-table td:first-child { width: 200px; color: var(--muted); font-size: 13px; padding-right: 24px; }
+
+  /* ── Next steps ── */
+  .next-steps { counter-reset: step; list-style: none; }
+  .next-steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--paper-dark);
+    align-items: flex-start;
+  }
+  .next-steps li:last-child { border-bottom: none; }
+  .next-steps li::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: 'Vollkorn', serif;
+    font-size: 20px;
+    color: var(--gold);
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+  .next-steps li .step-title { font-weight: 500; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+  .next-steps li .step-note { font-size: 13px; color: var(--muted); }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy);
+    padding: 32px 48px;
+    color: rgba(247,244,238,0.55);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  .note {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--gold);
+    padding: 14px 20px;
+    font-size: 13.5px;
+    margin-top: 20px;
+    color: #2a2a2a;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 36px 24px 32px; }
+    .container { padding: 0 20px; }
+    .split-grid { grid-template-columns: 1fr; }
+    .promo-item { grid-template-columns: 1fr; }
+    .promo-date { border-bottom: 1px solid var(--paper-dark); }
+    .footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Event Brief — Confidential</div>
+  <h1>Brew &amp; Being<br>at Moonstruck</h1>
+  <div class="header-sub">Saturday 9 May 2026 &nbsp;·&nbsp; 7:00 – 9:00 pm &nbsp;·&nbsp; Moonstruck Cafe, London</div>
+</div>
+<div class="gold-bar"></div>
+
+<div class="container">
+
+  <!-- ── At a glance ── -->
+  <section>
+    <div class="section-label">At a glance</div>
+    <div class="facts">
+      <div class="fact">
+        <div class="fact-label">Date</div>
+        <div class="fact-value">Saturday 9 May 2026</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Doors open</div>
+        <div class="fact-value">7:00 pm</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Close</div>
+        <div class="fact-value">~9:00 pm + linger</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Capacity</div>
+        <div class="fact-value">10–15 guests</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Format</div>
+        <div class="fact-value">Coffee · Tea · Cheesecake · Conversation</div>
+      </div>
+      <div class="fact">
+        <div class="fact-label">Ticketing</div>
+        <div class="fact-value">Luma &nbsp;·&nbsp; £32–48</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Run of Show ── -->
+  <section>
+    <div class="section-label">Run of show</div>
+    <div class="run-of-show">
+      <div class="ros-item">
+        <div class="ros-time">6:00</div>
+        <div>
+          <div class="ros-title">Setup</div>
+          <div class="ros-note">Angel and team arrive. Sets up coffee station, tea station and cheesecake table. Small arrival cards placed on seats.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">7:00</div>
+        <div>
+          <div class="ros-title">Doors open — guests arrive</div>
+          <div class="ros-note">Guests settle in. Each person receives a small card: write down one thing on your mind tonight. No sharing required.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">7:10</div>
+        <div>
+          <div class="ros-title">Coffee tasting — Angel leads</div>
+          <div class="ros-note">Light roast, single origin, one pour per person. Angel brews and leads. A conversation about what it takes to make one cup right, and what that attention means. ~20 minutes.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">7:30</div>
+        <div>
+          <div class="ros-title">A moment of quiet</div>
+          <div class="ros-note">5 minutes. Intentional. Everyone sits with their cup.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">7:35</div>
+        <div>
+          <div class="ros-title">Chinese tea + Living Well Initiative — Angel leads</div>
+          <div class="ros-note">Hand-brewed Chinese tea served to all. Angel introduces Living Well Initiative: what it is, why it exists. A conversation about slowness, intention, and the art of living well. ~45 minutes, flowing naturally.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">8:20</div>
+        <div>
+          <div class="ros-title">Rose Basque cheesecake + open conversation</div>
+          <div class="ros-note">Cheesecake served. Each person may share one thing if they choose.</div>
+        </div>
+      </div>
+      <div class="ros-item">
+        <div class="ros-time">8:50</div>
+        <div>
+          <div class="ros-title">Close + linger</div>
+          <div class="ros-note">A short close. Each guest writes one thing they want to carry into the week.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Responsibilities ── -->
+  <section>
+    <div class="section-label">Who brings what</div>
+    <div class="split-grid">
+      <div class="split-col">
+        <h3>Moonstruck brings</h3>
+        <ul>
+          <li>The space for the evening</li>
+          <li>Light roast, single origin coffee beans (1 pour per person, ~15 portions) <em>if Liam can kindly provide — Angel and team will brew</em></li>
+          <li>Coffee equipment (grinder + pour-over or preferred method) <em>if available — or Angel brings</em></li>
+          <li>Seating for 15 + 2 hosts</li>
+          <li>Moonstruck's IG reach (promo posts)</li>
+        </ul>
+      </div>
+      <div class="split-col">
+        <h3>Being brings</h3>
+        <ul>
+          <li>Event concept, curation and hosting</li>
+          <li>Chinese tea (loose leaf, teaware, hand-brewed by Angel)</li>
+          <li>Rose Basque cheesecake (hand-baked, one slice per person + extra)</li>
+          <li>Arrival cards + closing cards</li>
+          <li>Ticketing setup and management (Luma)</li>
+          <li>All event promotion from @livingwell_being</li>
+          <li>Post-event recap and community follow-up</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Logistics ── -->
+  <section>
+    <div class="section-label">Logistics</div>
+    <table class="logistics-table">
+      <tr><td>Arrival / setup</td><td>~60 min setup time before doors.</td></tr>
+      <tr><td>Coffee prep</td><td>Angel and team lead the tasting and brew. We'd love to use Moonstruck's beans and equipment if Liam can kindly provide — please advise. One pour-over per guest (approximately 15 cups), no milk.</td></tr>
+      <tr><td>Tea prep</td><td>Angel brings all teaware and loose-leaf Chinese tea. Requires a small surface near a kettle, or Angel can bring travel kettle.</td></tr>
+      <tr><td>Cheesecake</td><td>Angel's team bakes and brings the evening of. Serves ~16 slices (guests + hosts). Served at the table with small plates and forks (Angel brings, or if Moonstruck can kindly offer).</td></tr>
+      <tr><td>Seating</td><td>A single table or cluster of tables that seats 15–17 people together, or a comfortable lounge-style arrangement. Intimate, not lecture-style.</td></tr>
+      <tr><td>Arrival cards</td><td>Angel prepares and brings small cards for arrival and close. One pen per two guests needed (or Angel brings).</td></tr>
+      <tr><td>Music</td><td>Low ambient music during arrival and linger. Quiet or off during coffee tasting and tea. Moonstruck's existing playlist works perfectly if available.</td></tr>
+      <tr><td>Clean-up</td><td>Angel clears all items per Moonstruck's preferred methods. Tidy-up after guests leave.</td></tr>
+      <tr><td>Photography</td><td>Soft, natural photos welcome.</td></tr>
+      <tr><td>Posters</td><td>Angel prints posters 2–3 weeks before the event for Moonstruck to display in-store and share with guests.</td></tr>
+      <tr><td>Day-of contact</td><td>Angel to ask Liam for WhatsApp if he prefers — easier for last-minute coordination on the day.</td></tr>
+    </table>
+  </section>
+
+  <!-- ── Ticketing ── -->
+  <section>
+    <div class="section-label">Ticketing</div>
+
+    <div class="platform-box">
+      <div class="platform-name">Recommended: Luma</div>
+      <span class="platform-url">lu.ma &nbsp;·&nbsp; Registration link: Angel sets up by 18 April</span>
+      <p style="font-size:14px; margin-bottom:14px;">Luma is the go-to platform for London's community and intentional living scene — the same audience Brew &amp; Being is for. Clean, beautiful listings, low fees, and excellent IG-sharing format. Angel will create and manage the Luma event under the Being account.</p>
+      <ul style="font-size:13.5px; list-style:none; display:grid; gap:6px;">
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Platform fee: ~3.5% + card processing (significantly less than Eventbrite)</li>
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Free to set up; no subscription needed</li>
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Generates a clean shareable link and event card for IG stories</li>
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Waitlist management built in (monitored by Angel)</li>
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Refund policy: full refund up to 7 days before (by 2 May); non-refundable within 7 days, ticket transferable</li>
+        <li style="display:flex; gap:10px;"><span style="color:var(--gold);">—</span> Angel handles all ticketing admin; Liam receives agreed share via bank transfer after event</li>
+      </ul>
+    </div>
+
+    <table class="ticket-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Price</th>
+          <th>Available until</th>
+          <th>What's included</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tier">Early Bird</td>
+          <td class="price">£32</td>
+          <td style="color:var(--muted); font-size:13px;">Until Friday 1 May</td>
+          <td style="font-size:13px; color:var(--muted);">Coffee tasting · Chinese tea · Rose Basque cheesecake</td>
+        </tr>
+        <tr>
+          <td class="tier">Standard</td>
+          <td class="price">£38</td>
+          <td style="color:var(--muted); font-size:13px;">Until event</td>
+          <td style="font-size:13px; color:var(--muted);">Coffee tasting · Chinese tea · Rose Basque cheesecake</td>
+        </tr>
+        <tr>
+          <td class="tier">Support</td>
+          <td class="price">£48</td>
+          <td style="color:var(--muted); font-size:13px;">Until event</td>
+          <td style="font-size:13px; color:var(--muted);">Same as Standard · A little extra goodwill</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="revenue-example">
+      <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">Revenue illustration (12 guests, mix of tiers)</div>
+      <div class="revenue-row"><span>12 guests average £38</span><span>£456 gross</span></div>
+      <div class="revenue-row"><span>Luma fees (~3.5% + processing)</span><span>–£20</span></div>
+      <div class="revenue-row"><span>Net revenue</span><span>~£436</span></div>
+      <div class="revenue-row total"><span>Moonstruck share (30%)</span><span>~£131</span></div>
+      <div class="revenue-row total"><span>Being share (70%)</span><span>~£305</span></div>
+      <div style="font-size:12px; color:var(--muted); margin-top:12px;">Being's share covers ingredients, ops, and contribution to Being Community Fund. Payment to Moonstruck within 3 business days after event.</div>
+    </div>
+  </section>
+
+  <!-- ── Promotion plan ── -->
+  <section>
+    <div class="section-label">Promotion plan</div>
+    <p style="margin-bottom:24px; font-size:14px; color:var(--muted);">Each of us posts from our own account. Luma event page goes live <strong style="color:var(--navy);">15 April</strong> — tickets on sale from <strong style="color:var(--navy);">20 April</strong>.</p>
+
+    <div class="promo-timeline">
+
+      <div class="promo-item">
+        <div class="promo-date">Mon 20 Apr<span>Tickets live</span></div>
+        <div class="promo-content">
+          <strong>Launch post — both accounts</strong>
+          Announce Brew &amp; Being at Moonstruck. Share the Luma link in bio / stories. IG feed post + story with ticket link sticker.
+          <div class="promo-tags">
+            <span class="tag being">@livingwell_being</span>
+            <span class="tag moonstruck">@moonstruck.cafe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo-item">
+        <div class="promo-date">Tue 28 Apr<span>~11 days before</span></div>
+        <div class="promo-content">
+          <strong>Midpoint reminder — story only</strong>
+          "Still a few spots left" — light touch. Stories only, both accounts. Ticket link.
+          <div class="promo-tags">
+            <span class="tag being">@livingwell_being</span>
+            <span class="tag moonstruck">@moonstruck.cafe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo-item">
+        <div class="promo-date">Mon 4 May<span>~5 days before</span></div>
+        <div class="promo-content">
+          <strong>Behind-the-scenes — one account</strong>
+          Angel posts a tea prep or cheesecake baking moment. Soft, personal, warm. Tags @moonstruck.cafe.
+          <div class="promo-tags">
+            <span class="tag being">@livingwell_being</span>
+            <span class="tag moonstruck">tags @moonstruck.cafe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo-item">
+        <div class="promo-date">Fri 8 May<span>Day before</span></div>
+        <div class="promo-content">
+          <strong>"Tomorrow evening" — story only</strong>
+          Both post a simple story: "We're tomorrow." Ticket link.
+          <div class="promo-tags">
+            <span class="tag being">@livingwell_being</span>
+            <span class="tag moonstruck">@moonstruck.cafe</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="promo-item">
+        <div class="promo-date">Sun 10 May<span>Day after</span></div>
+        <div class="promo-content">
+          <strong>Post-event recap — one or two images, both accounts</strong>
+          One or two beautiful images from the evening (cups, people in conversation). This post seeds the next one.
+          <div class="promo-tags">
+            <span class="tag being">@livingwell_being</span>
+            <span class="tag moonstruck">@moonstruck.cafe</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note">
+      Caption drafts for all posts are in the separate <strong>Social Media Copy</strong> document. Angel handles all Luma setup, event listing copy, and story assets. Liam only needs to share the link from his account.
+    </div>
+  </section>
+
+  <!-- ── Next steps ── -->
+  <section>
+    <div class="section-label">Next steps</div>
+    <ul class="next-steps">
+      <li>
+        <div>
+          <div class="step-title">Confirm details — Liam</div>
+          <div class="step-note">Confirm: space access from 6pm · coffee beans + equipment (if available) · seating arrangement · revenue split · social posts · WhatsApp for day-of contact.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Angel sets up Luma event page — by 18 April</div>
+          <div class="step-note">Angel creates the listing, drafts copy, sets capacity to 15. Sends Liam preview link to review before going live.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Tickets live — 20 April</div>
+          <div class="step-note">Both accounts post launch content. Luma link in bio and story.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Confirm guest count — 7 May</div>
+          <div class="step-note">Angel messages Liam with final RSVP numbers.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Evening of — Saturday 9 May, 6:00 pm</div>
+          <div class="step-note">Angel arrives at 6:00. Setup. Doors at 7:00.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Revenue transfer — by 12 May</div>
+          <div class="step-note">Angel transfers Moonstruck's share via bank transfer within 3 business days of the event.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<div class="footer">
+  <span>Brew &amp; Being · Being Commons Ltd · Company No. 16140271</span>
+  <span>Prepared by Angel Ruonan Yu · <a href="mailto:angel@beinghome.uk">angel@beinghome.uk</a></span>
+</div>
+
+</body>
+</html>
