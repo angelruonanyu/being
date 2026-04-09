@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew & Being at Moonstruck — Materials</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #2d4278;
+    --gold:       #B8913A;
+    --paper:      #F7F4EE;
+    --paper-dark: #EDE8DC;
+    --muted:      #7A7A8A;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+
+  .wrap {
+    max-width: 540px;
+    width: 100%;
+  }
+
+  /* eyebrow */
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  /* title */
+  h1 {
+    font-family: 'Vollkorn', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 400;
+    color: var(--paper);
+    line-height: 1.08;
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: rgba(247,244,238,0.5);
+    text-align: center;
+    letter-spacing: 0.06em;
+    margin-bottom: 48px;
+  }
+
+  /* gold rule */
+  .rule {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 auto 48px;
+  }
+
+  /* cards */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  }
+
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 16px;
+    opacity: 0.6;
+  }
+
+  .card-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-family: 'Vollkorn', serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    flex: 1;
+    margin-bottom: 20px;
+  }
+
+  .card-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--navy);
+    color: var(--paper);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .card-btn:hover { background: #1e2f56; }
+
+  .card-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* view link */
+  .card-view {
+    display: block;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .card-view:hover { color: var(--navy); }
+
+  /* footer */
+  .footer-line {
+    text-align: center;
+    font-size: 11px;
+    color: rgba(247,244,238,0.25);
+    letter-spacing: 0.06em;
+  }
+  .footer-line a { color: var(--gold); text-decoration: none; }
+  .footer-line a:hover { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    .cards { grid-template-columns: 1fr; }
+    h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <p class="eyebrow">Saturday 9 May 2026 · Moonstruck Cafe, London</p>
+
+  <h1>Brew &amp; Being</h1>
+
+  <p class="subtitle">7:00 – 9:00 pm &nbsp;·&nbsp; Coffee · Tea · Cheesecake · Conversation</p>
+
+  <div class="rule"></div>
+
+  <div class="cards">
+
+    <!-- Brief card -->
+    <div class="card">
+      <svg class="card-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="4" width="16" height="20" rx="1" stroke="#2d4278" stroke-width="1.5"/>
+        <line x1="10" y1="10" x2="18" y2="10" stroke="#B8913A" stroke-width="1.5"/>
+        <line x1="10" y1="14" x2="18" y2="14" stroke="#B8913A" stroke-width="1.5"/>
+        <line x1="10" y1="18" x2="15" y2="18" stroke="#B8913A" stroke-width="1.5"/>
+        <rect x="18" y="16" width="8" height="8" rx="4" fill="#2d4278"/>
+        <line x1="22" y1="18" x2="22" y2="22" stroke="white" stroke-width="1.2"/>
+        <line x1="20" y1="20" x2="24" y2="20" stroke="white" stroke-width="1.2"/>
+      </svg>
+      <div class="card-label">Document 01</div>
+      <div class="card-title">Event Brief</div>
+      <div class="card-desc">Full working document — run of show, logistics, revenue split, promotion plan and next steps.</div>
+      <a class="card-btn" href="brew-being-brief.html" download="Brew-Being-Event-Brief.html">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Download brief
+      </a>
+      <a class="card-view" href="brew-being-brief.html" target="_blank">View in browser ↗</a>
+    </div>
+
+    <!-- Social copy card -->
+    <div class="card">
+      <svg class="card-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="8" width="14" height="10" rx="1.5" stroke="#2d4278" stroke-width="1.5"/>
+        <path d="M8 18v4l4-4" stroke="#2d4278" stroke-width="1.5" stroke-linejoin="round"/>
+        <circle cx="23" cy="9" r="4" stroke="#B8913A" stroke-width="1.5"/>
+        <circle cx="23" cy="23" r="4" stroke="#B8913A" stroke-width="1.5"/>
+        <line x1="19.3" y1="11.2" x2="15" y2="14" stroke="#B8913A" stroke-width="1.2"/>
+        <line x1="19.3" y1="20.8" x2="15" y2="18" stroke="#B8913A" stroke-width="1.2"/>
+      </svg>
+      <div class="card-label">Document 02</div>
+      <div class="card-title">Social Media Copy</div>
+      <div class="card-desc">Ready-to-post captions for all 5 posts across both accounts, plus the Luma event listing copy.</div>
+      <a class="card-btn" href="brew-being-social-copy.html" download="Brew-Being-Social-Copy.html">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Download copy
+      </a>
+      <a class="card-view" href="brew-being-social-copy.html" target="_blank">View in browser ↗</a>
+    </div>
+
+  </div>
+
+  <p class="footer-line">
+    Brew &amp; Being · Being Commons Ltd &nbsp;·&nbsp;
+    <a href="mailto:angel@beinghome.uk">angel@beinghome.uk</a>
+  </p>
+
+</div>
+
+</body>
+</html>
